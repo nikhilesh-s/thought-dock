@@ -19,3 +19,13 @@ What the AI agent actually did, in order. Results are copied from real command o
    - `vercel integration add upstash/upstash-kv`: resource `thought-dock-kv`, connected to the project; `KV_*` env vars pulled to `.env.local` (gitignored).
 7. **GitHub.** Created 7 labels, 4 sprint milestones, and issues #1–#21: 11 AI-built issues that need a human review tick, plus 10 teammate tasks.
    - The Projects board needs `gh auth refresh -s project`, which Nikhilesh has to run because it's an interactive login.
+8. **Merged subagent branches.**
+   - Classifier: 690 rows; held-out accuracy 85.8%.
+   - Landing page.
+   - App UI: 24 components; 17 headless action checks passed.
+   - /brag video: 25 s, 4 MB, rendered with Hyperframes.
+   - /jared portfolio + 3D dock: STL and dimensioned SVG drawing.
+   - One merge conflict in `components/Icons.tsx`, resolved by keeping both sides.
+9. **Contrast check.** Added `scripts/check-contrast.mjs`. It caught the light accent at 4.31:1, which was changed to #0066cc (5.11:1).
+10. **Fixed a J/K conflict.** K was assigned to both Keep and "previous". K is Keep; previous is ↑.
+11. **Deployed** `vercel deploy --prod`: https://thought-dock-peach.vercel.app. Production smoke test passed; see TEST_REPORT.md.
