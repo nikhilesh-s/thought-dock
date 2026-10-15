@@ -36,7 +36,10 @@ export const PlusIcon = (p: P) => <Svg {...p}><path d="M12 5v14M5 12h14" /></Svg
 export const CloseIcon = (p: P) => <Svg {...p}><path d="M6 6l12 12M18 6 6 18" /></Svg>;
 export const KeepIcon = (p: P) => <Svg {...p}><path d="M7 3.5h10a1 1 0 0 1 1 1V21l-6-4-6 4V4.5a1 1 0 0 1 1-1Z" /></Svg>;
 export const CloudIcon = (p: P) => <Svg {...p}><path d="M7 18.5h10.5a4 4 0 0 0 .4-8 6 6 0 0 0-11.6 1.6A3.3 3.3 0 0 0 7 18.5Z" /></Svg>;
-export const TodayIcon = (p: P) => <Svg {...p}><circle cx="12" cy="12" r="4" /><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4" /></Svg>;
+export const ChevronLeftIcon = (p: P) => <Svg {...p}><path d="m14.5 5-7 7 7 7" /></Svg>;
+export const ChevronRightIcon = (p: P) => <Svg {...p}><path d="m9.5 5 7 7-7 7" /></Svg>;
+export const TodayIcon = (p: P) => <Svg {...p}><circle cx="12" cy="12" r="4" /><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4" /></Svg>;
+export const KeyboardIcon = (p: P) => <Svg {...p}><rect x="2.5" y="6" width="19" height="12" rx="2.5" /><path d="M6.5 10h1M10 10h1M13.5 10h1M17 10h.5M8 14h8" /></Svg>;
 export const ArrowRightIcon = (p: P) => <Svg {...p}><path d="M5 12h14M13 6l6 6-6 6" /></Svg>;
 
 export const KIND_ICON: Record<Kind, (p: P) => React.ReactElement> = {

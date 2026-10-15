@@ -100,6 +100,7 @@ export function useDock(id: string | null, pollMs = 4000) {
   const flushing = useRef(false);
   const server = useRef<Dock | null>(null);
   const flushRef = useRef<() => void>(() => {});
+  const flushes = useRef(0); // bumps on every successful flush; a GET that raced one is stale
 
   const recompute = useCallback(() => {
     if (server.current) setDock(applyLocal(server.current, queue.current));
@@ -110,10 +111,13 @@ export function useDock(id: string | null, pollMs = 4000) {
     flushing.current = true;
     const batch = queue.current.slice(0, 200);
     setState("saving");
+    let retry = 3000;
     try {
       const r = await fetch(`/api/dock/${id}`, { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify({ ops: batch }) });
-      if (r.status === 404) { setState("missing"); return; }
+      if (r.status === 404) { retry = -1; setState("missing"); return; }
       if (!r.ok) throw new Error(String(r.status));
+      flushes.current++;
+      retry = 0; // more queued while we were saving: send it now, not in 3s
       queue.current = queue.current.slice(batch.length);
       if (server.current) server.current = applyLocal(server.current, batch);
       write(queueKey(id), queue.current);
@@ -122,7 +126,7 @@ export function useDock(id: string | null, pollMs = 4000) {
       setState("offline");
     } finally {
       flushing.current = false;
-      if (queue.current.length && navigator.onLine) setTimeout(() => flushRef.current(), 3000);
+      if (retry >= 0 && queue.current.length && navigator.onLine) setTimeout(() => flushRef.current(), retry);
     }
   }, [id]);
 
@@ -130,11 +134,14 @@ export function useDock(id: string | null, pollMs = 4000) {
 
   const load = useCallback(async () => {
     if (!id) return;
+    const seen = flushes.current;
     try {
       const r = await fetch(`/api/dock/${id}`, { cache: "no-store" });
       if (r.status === 404) { setState("missing"); return; }
       if (!r.ok) throw new Error(String(r.status));
-      server.current = (await r.json()) as Dock;
+      const fresh = (await r.json()) as Dock;
+      if (flushing.current || seen !== flushes.current) return; // raced a write; next poll is accurate
+      server.current = fresh;
       write(cacheKey(id), server.current);
       recompute();
       setState((s) => (queue.current.length ? s : "synced"));
