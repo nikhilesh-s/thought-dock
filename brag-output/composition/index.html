@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Thought Dock — launch film</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="assets/audio-rms.js"></script>
+    <style>
+      /* Tokens from app/globals.css (light theme) */
+      :root {
+        --bg: #f5f5f7;
+        --surface: #ffffff;
+        --surface-2: #fbfbfd;
+        --line: rgba(0, 0, 0, 0.08);
+        --line-strong: rgba(0, 0, 0, 0.16);
+        --text: #1d1d1f;
+        --text-2: #424245;
+        --muted: #6e6e73;
+        --accent: #0071e3;
+        --accent-soft: rgba(0, 113, 227, 0.1);
+        --ink: #1d1d1f;
+        --k-event: #b2380b;
+        --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.04);
+        --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.05), 0 36px 80px rgba(0, 40, 100, 0.14);
+        --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, "Helvetica Neue", sans-serif;
+        --mono: "SF Mono", ui-monospace, Menlo, monospace;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #ffffff; font-family: var(--sans); color: var(--text); -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+      #stage { position: absolute; inset: 0; }
+      #canvas { position: absolute; inset: 0; background: #ffffff; }
+      #glow {
+        position: absolute; left: 360px; top: 40px; width: 1200px; height: 1000px; border-radius: 50%;
+        background: radial-gradient(closest-side, rgba(0, 113, 227, 0.16), rgba(0, 113, 227, 0.05) 55%, rgba(0, 113, 227, 0) 100%);
+        opacity: 0.5;
+      }
+      .scene { position: absolute; inset: 0; width: 1920px; height: 1080px; opacity: 0; }
+      svg.i { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; display: block; }
+      .tnum { font-variant-numeric: tabular-nums; }
+      .key {
+        display: inline-flex; align-items: center; justify-content: center; min-width: 38px; height: 38px; padding: 0 9px;
+        border-radius: 8px; border: 1.5px solid var(--line-strong); background: var(--surface-2); color: var(--text-2);
+        font-family: var(--mono); font-size: 20px; box-shadow: inset 0 -2px 0 var(--line-strong);
+      }
+
+      /* Scene 1 — hook */
+      #s1 { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      #s1-logo { width: 120px; height: 120px; display: block; }
+      .hook { margin: 0; font-size: 156px; line-height: 1.04; font-weight: 600; letter-spacing: -0.04em; display: block; }
+      #s1-l1 { margin-top: 56px; }
+      #s1-l2 { color: var(--muted); }
+
+      /* Scene 2 — phone capture */
+      #s2 { display: grid; grid-template-columns: 760px 1fr; align-items: center; padding: 0 140px 0 180px; }
+      #phone { width: 452px; height: 980px; border-radius: 68px; background: var(--ink); padding: 12px; box-shadow: var(--shadow-2); justify-self: center; }
+      #screen { position: relative; width: 100%; height: 100%; border-radius: 57px; background: var(--bg); overflow: hidden; padding: 0 26px; }
+      .status { display: flex; justify-content: space-between; align-items: center; height: 58px; padding: 6px 14px 0; font-size: 19px; font-weight: 600; }
+      .battery { width: 36px; height: 17px; border-radius: 5px; border: 2px solid rgba(29, 29, 31, 0.6); }
+      .ph-head { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 21px; }
+      .ph-brand { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+      .ph-link { color: #006ede; font-size: 19px; }
+      .ph-sync { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 17px; margin-top: 10px; }
+      #field { position: relative; margin-top: 16px; height: 280px; border-radius: 22px; background: var(--surface); box-shadow: 0 0 0 3px var(--accent); padding: 26px 26px; font-size: 29px; line-height: 1.36; }
+      #field-ph { position: absolute; left: 26px; top: 26px; color: var(--muted); }
+      #field-text { position: relative; }
+      #field-text span { opacity: 0; }
+      #caret { display: inline-block; width: 3px; height: 34px; background: var(--accent); vertical-align: -6px; margin-left: 2px; }
+      .caps-label { margin: 26px 2px 6px; font-size: 17px; font-weight: 600; color: var(--muted); }
+      #caps-clip { height: 184px; overflow: hidden; }
+      #caps { display: block; }
+      .cap { display: flex; justify-content: space-between; gap: 14px; padding: 13px 2px; border-bottom: 1.5px solid var(--line); font-size: 19px; line-height: 1.32; height: 92px; }
+      .cap span:last-child { color: var(--muted); font-size: 17px; white-space: nowrap; }
+      #toast { position: absolute; left: 58px; right: 58px; bottom: 118px; height: 64px; border-radius: 999px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; font-size: 21px; box-shadow: var(--shadow-2); opacity: 0; }
+      #toast b { font-weight: 600; }
+      #dock { position: absolute; left: 20px; right: 20px; bottom: 26px; height: 80px; border-radius: 999px; background: var(--surface); box-shadow: 0 0 0 1.5px var(--line), var(--shadow-2); display: flex; align-items: center; gap: 6px; padding: 8px 8px 8px 22px; font-size: 21px; color: var(--text); }
+      .dock-btn { display: flex; align-items: center; gap: 8px; padding: 0 12px; }
+      #save { margin-left: auto; height: 64px; width: 136px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 600; font-size: 23px; display: flex; align-items: center; justify-content: center; }
+      #save-dim { position: absolute; inset: 0; border-radius: 999px; background: rgba(255, 255, 255, 0.5); }
+      .copy h2 { margin: 0; font-size: 104px; line-height: 1.02; font-weight: 600; letter-spacing: -0.035em; }
+      .copy p { margin: 34px 0 0; font-size: 38px; line-height: 1.32; color: var(--text-2); max-width: 820px; }
+      .copy h2, .copy p { display: block; }
+
+      /* Scene 3 — desk inbox */
+      #s3 { display: flex; flex-direction: column; align-items: center; }
+      #s3-cap { margin: 64px 0 0; font-size: 64px; font-weight: 600; letter-spacing: -0.03em; display: block; }
+      #win-wrap { margin-top: 44px; width: 1360px; height: 850px; position: relative; }
+      #win { position: absolute; inset: 0; border-radius: 22px; overflow: hidden; box-shadow: 0 0 0 1.5px var(--line), var(--shadow-2); background: var(--bg); }
+      #win img { width: 1360px; height: 850px; display: block; }
+      #row-ring { position: absolute; left: 238px; top: 58px; width: 330px; height: 85px; border-radius: 14px; box-shadow: 0 0 0 4px var(--accent); opacity: 0; }
+
+      /* Scene 4 — sort */
+      #s4 { display: flex; flex-direction: column; align-items: center; }
+      #s4-h { margin: 58px 0 0; font-size: 80px; font-weight: 600; letter-spacing: -0.035em; display: block; }
+      #s4-sub { margin: 14px 0 0; font-size: 36px; color: var(--text-2); display: block; }
+      #sort { position: relative; margin-top: 44px; width: 1640px; height: 640px; border-radius: 28px; background: var(--bg); padding: 40px 56px; }
+      .sort-top { display: flex; justify-content: space-between; align-items: center; font-size: 24px; color: var(--accent); height: 36px; }
+      .sort-count { position: relative; width: 120px; height: 36px; color: var(--text-2); }
+      .sort-count span { position: absolute; right: 0; top: 0; }
+      #cards { position: relative; margin: 26px auto 0; width: 1140px; height: 330px; }
+      .card { position: absolute; inset: 0; border-radius: 28px; background: var(--surface); box-shadow: 0 0 0 1.5px var(--line), var(--shadow-1); padding: 46px 60px; }
+      .card .meta { font-size: 22px; color: var(--muted); }
+      .card .thought { margin-top: 14px; font-size: 52px; line-height: 1.17; font-weight: 600; letter-spacing: -0.02em; max-width: 1000px; }
+      .chip { display: inline-flex; align-items: center; gap: 10px; margin-top: 24px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface-2); padding: 9px 22px 9px 14px; font-size: 24px; color: var(--text-2); }
+      .chip b { color: var(--text); font-weight: 600; }
+      #actions { display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px; margin-top: 34px; }
+      .act { position: relative; height: 150px; border-radius: 18px; background: var(--surface); box-shadow: 0 0 0 1.5px var(--line), var(--shadow-1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-size: 24px; font-weight: 500; }
+      .act-hi { position: absolute; inset: 0; border-radius: 18px; background: var(--accent-soft); box-shadow: 0 0 0 3px var(--accent); opacity: 0; }
+      .act > *:not(.act-hi) { position: relative; }
+      #sort-toast { position: absolute; left: 50%; bottom: -34px; margin-left: -230px; width: 460px; height: 68px; border-radius: 999px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: var(--shadow-2); opacity: 0; }
+      .tl { position: absolute; display: flex; gap: 22px; align-items: center; }
+      .tl b { font-weight: 600; }
+      #tt-1 { opacity: 1; }
+      #tt-2 { opacity: 0; }
+      #undo-keys { position: absolute; right: 120px; bottom: -24px; display: flex; gap: 8px; opacity: 0; }
+      #undo-keys .key { font-size: 26px; height: 52px; min-width: 52px; background: #fff; }
+
+      /* Scene 5 — pair + accessibility */
+      #s5 { display: grid; grid-template-columns: 820px 1fr; align-items: center; padding: 0 120px 0 140px; }
+      #pair { width: 594px; height: 721px; border-radius: 26px; overflow: hidden; box-shadow: 0 0 0 1.5px var(--line), var(--shadow-2); justify-self: center; background: #fff; }
+      #pair img { width: 594px; height: 721px; display: block; }
+      .promise { margin: 0; font-size: 66px; line-height: 1.12; font-weight: 600; letter-spacing: -0.035em; display: block; }
+      .promise + .promise { margin-top: 36px; }
+      .promise .m { color: var(--muted); display: block; }
+
+      /* Scene 6 — outro */
+      #s6 { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+      #s6-mark { display: flex; align-items: center; gap: 34px; }
+      #s6-mark svg { width: 136px; height: 136px; display: block; }
+      #s6-name { font-size: 132px; font-weight: 600; letter-spacing: -0.04em; display: block; }
+      #s6-tag { margin: 34px 0 0; font-size: 54px; font-weight: 600; letter-spacing: -0.03em; color: var(--accent); display: block; }
+      #s6-credit { margin: 80px 0 0; font-size: 30px; color: var(--muted); display: block; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="25">
+      <div id="stage" class="clip" data-start="0" data-duration="25" data-track-index="1">
+        <div id="canvas"></div>
+        <div id="glow"></div>
+
+        <!-- Scene 1: hook -->
+        <section id="s1" class="scene">
+          <svg id="s1-logo" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="1" y="1" width="30" height="30" rx="9" fill="#1d1d1f" />
+            <rect x="7" y="18" width="18" height="6" rx="3" fill="#ffffff" opacity="0.92" />
+            <circle cx="16" cy="11.5" r="3.5" fill="#0071e3" />
+          </svg>
+          <h1 id="s1-l1" class="hook">Capture now.</h1>
+          <h1 id="s1-l2" class="hook">Organize later.</h1>
+        </section>
+
+        <!-- Scene 2: capture on the phone -->
+        <section id="s2" class="scene">
+          <div id="phone">
+            <div id="screen">
+              <div class="status"><span class="tnum">9:41</span><span class="battery"></span></div>
+              <div class="ph-head">
+                <span class="ph-brand">
+                  <svg viewBox="0 0 32 32" width="34" height="34" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="9" fill="#1d1d1f" /><rect x="7" y="18" width="18" height="6" rx="3" fill="#fff" opacity="0.92" /><circle cx="16" cy="11.5" r="3.5" fill="#0071e3" /></svg>
+                  Thought Dock
+                </span>
+                <span class="ph-link">Open your desk</span>
+              </div>
+              <div class="ph-sync">
+                <svg class="i" viewBox="0 0 24 24" width="20" height="20"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+                Saved
+              </div>
+              <div id="field">
+                <div id="field-ph">What's on your mind?</div>
+                <div id="field-text"></div>
+              </div>
+              <p class="caps-label">Today's captures</p>
+              <div id="caps-clip">
+                <div id="caps">
+                  <div class="cap" id="cap-new"><span>remember to email Professor Lee about missing Thursday's lab</span><span>Just now</span></div>
+                  <div class="cap"><span>UC transfer application due Nov 30, need to finish personal insight questions</span><span>12:54 PM</span></div>
+                  <div class="cap"><span>study group for ENGR 1 thursday 6pm library room 204</span><span>10:54 AM</span></div>
+                </div>
+              </div>
+              <div id="toast"><span>Saved to your inbox</span><b>Undo</b></div>
+              <div id="dock">
+                <span class="dock-btn"><svg class="i" viewBox="0 0 24 24" width="26" height="26"><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" /></svg>Voice</span>
+                <span class="dock-btn"><svg class="i" viewBox="0 0 24 24" width="26" height="26"><rect x="3" y="5" width="18" height="14" rx="3" /><circle cx="9" cy="10" r="1.8" /><path d="m21 16-5-5-8 8" /></svg>Photo</span>
+                <div id="save" style="position: relative">Save<div id="save-dim"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="copy">
+            <h2 id="s2-h">One field.<span style="display: block">One Save.</span></h2>
+            <p id="s2-p">Type it, say it, or snap a photo. Voice notes show a live transcript. No folders, tags, or dates.</p>
+          </div>
+        </section>
+
+        <!-- Scene 3: desk inbox (real screenshot) -->
+        <section id="s3" class="scene">
+          <h2 id="s3-cap">Later, it's waiting in your inbox.</h2>
+          <div id="win-wrap">
+            <div id="win"><img src="assets/img/desk-light.png" alt="DeskOS inbox with the thought at the top" /></div>
+            <div id="row-ring"></div>
+          </div>
+        </section>
+
+        <!-- Scene 4: sort -->
+        <section id="s4" class="scene">
+          <h2 id="s4-h">Sort one thought at a time.</h2>
+          <p id="s4-sub">A small model we trained suggests what it is. You decide.</p>
+          <div id="sort">
+            <div class="sort-top">
+              <span>‹ Done sorting</span>
+              <span class="sort-count tnum"><span id="cnt-1">1 of 5</span><span id="cnt-2" style="opacity: 0">1 of 4</span></span>
+            </div>
+            <div id="cards">
+              <div class="card" id="card-1">
+                <div class="meta">From your phone · 5 hours ago</div>
+                <div class="thought">study group for ENGR 1 thursday 6pm library room 204</div>
+                <div class="chip" id="chip-1">
+                  <svg class="i" viewBox="0 0 24 24" width="28" height="28" style="color: var(--k-event)"><rect x="3.5" y="5" width="17" height="15" rx="3" /><path d="M3.5 9.5h17M8 3v4M16 3v4" /></svg>
+                  Looks like an <b>Event</b>
+                </div>
+              </div>
+              <div class="card" id="card-2" style="opacity: 0">
+                <div class="meta">From your phone · 3 hours ago</div>
+                <div class="thought">UC transfer application due Nov 30, need to finish personal insight questions</div>
+                <div class="chip" id="chip-2">
+                  <svg class="i" viewBox="0 0 24 24" width="28" height="28" style="color: var(--accent)"><circle cx="12" cy="12" r="8.5" /><path d="m8.5 12.2 2.3 2.3 4.7-5" /></svg>
+                  Looks like a <b>Task</b>
+                </div>
+              </div>
+            </div>
+            <div id="actions">
+              <div class="act" id="act-T"><div class="act-hi"></div><svg class="i" viewBox="0 0 24 24" width="32" height="32"><circle cx="12" cy="12" r="8.5" /><path d="m8.5 12.2 2.3 2.3 4.7-5" /></svg><span>Make a Task</span><span class="key">T</span></div>
+              <div class="act" id="act-E"><div class="act-hi"></div><svg class="i" viewBox="0 0 24 24" width="32" height="32"><rect x="3.5" y="5" width="17" height="15" rx="3" /><path d="M3.5 9.5h17M8 3v4M16 3v4" /></svg><span>Make an Event</span><span class="key">E</span></div>
+              <div class="act"><svg class="i" viewBox="0 0 24 24" width="32" height="32"><path d="M3.5 7.5A2 2 0 0 1 5.5 5.5h4l2 2h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2Z" /></svg><span>Move to Space</span><span class="key">M</span></div>
+              <div class="act"><svg class="i" viewBox="0 0 24 24" width="32" height="32"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16Z" /><path d="m13.5 6.5 4 4" /></svg><span>Develop</span><span class="key">D</span></div>
+              <div class="act"><svg class="i" viewBox="0 0 24 24" width="32" height="32"><circle cx="6" cy="6" r="2.5" /><circle cx="18" cy="18" r="2.5" /><circle cx="18" cy="6" r="2.5" /><path d="M8.2 7.2 15.8 16.8M8.5 6h7" /></svg><span>Connect</span><span class="key">C</span></div>
+              <div class="act"><svg class="i" viewBox="0 0 24 24" width="32" height="32"><path d="M7 3.5h10a1 1 0 0 1 1 1V21l-6-4-6 4V4.5a1 1 0 0 1 1-1Z" /></svg><span>Keep</span><span class="key">K</span></div>
+              <div class="act"><svg class="i" viewBox="0 0 24 24" width="32" height="32"><rect x="3" y="4" width="18" height="4.5" rx="1.2" /><path d="M5 8.5V18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.5M10 12.5h4" /></svg><span>Archive</span><span class="key">A</span></div>
+            </div>
+            <div id="sort-toast">
+              <span class="tl" id="tt-1"><span>Made an event</span><b>Undo</b></span>
+              <span class="tl" id="tt-2"><span>Undone: Made an event</span></span>
+            </div>
+            <div id="undo-keys"><span class="key">⌘</span><span class="key">Z</span></div>
+          </div>
+        </section>
+
+        <!-- Scene 5: pair + accessibility -->
+        <section id="s5" class="scene">
+          <div id="pair"><img src="assets/img/pair-card.png" alt="Pair your phone dialog with a QR code" /></div>
+          <div>
+            <p class="promise" id="pr-1">Pair with a QR code. <span class="m">No account.</span></p>
+            <p class="promise" id="pr-2">Keyboard for everything.</p>
+            <p class="promise" id="pr-3">Light and dark. <span class="m">Reduced motion.</span></p>
+          </div>
+        </section>
+
+        <!-- Scene 6: outro -->
+        <section id="s6" class="scene">
+          <div id="s6-mark">
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <rect x="1" y="1" width="30" height="30" rx="9" fill="#1d1d1f" />
+              <rect x="7" y="18" width="18" height="6" rx="3" fill="#ffffff" opacity="0.92" />
+              <circle cx="16" cy="11.5" r="3.5" fill="#0071e3" />
+            </svg>
+            <span id="s6-name">Thought Dock</span>
+          </div>
+          <p id="s6-tag">Capture now. Organize later.</p>
+          <p id="s6-credit">Made by Luke, Nikhilesh and Maryam for ENGR 1.</p>
+        </section>
+      </div>
+
+      <!-- Audio -->
+      <audio id="bgm" data-start="0" data-duration="25" data-track-index="10" data-volume="1" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3"></audio>
+      <div id="sfx"></div>
+    </div>
+
+    <script>
+      // ---- Static content built synchronously (deterministic) ----
+      var THOUGHT = "remember to email Professor Lee about missing Thursday's lab";
+      var ft = document.getElementById("field-text");
+      for (var c = 0; c < THOUGHT.length; c++) {
+        var sp = document.createElement("span");
+        sp.id = "ch-" + c;
+        sp.textContent = THOUGHT[c];
+        ft.appendChild(sp);
+      }
+      var caret = document.createElement("span");
+      caret.id = "caret";
+      ft.appendChild(caret);
+
+      // SFX elements (each its own audio clip)
+      var SFX = [];
+      function sfx(file, start, vol, dur, track) {
+        SFX.push([file, start, vol, dur, track]);
+      }
+      var TYPE_START = 3.6, TYPE_STEP = 0.034; // ~2.0s for the whole line
+      var keys = ["003", "007", "011", "015", "019", "023"];
+      for (var k = 0, n = 0; k < THOUGHT.length; k += 4, n++) {
+        sfx("keypress-" + keys[n % keys.length] + ".wav", +(TYPE_START + k * TYPE_STEP).toFixed(3), 0.32, 0.12, 11 + (n % 2));
+      }
+      sfx("click_003.ogg", 5.72, 0.7, 0.01, 13);          // Save tap
+      sfx("drop_001.ogg", 5.9, 0.45, 0.11, 14);            // toast rises
+      sfx("impactSoft_medium_001.ogg", 8.74, 0.5, 0.18, 13); // beat-locked: 8.74s desk reveal
+      sfx("click_005.ogg", 13.11, 0.7, 0.01, 13);          // beat-grid: E press 13.11
+      sfx("click_005.ogg", 16.38, 0.7, 0.01, 13);          // beat-grid: ⌘Z press 16.38
+      sfx("bong_001.ogg", 18.56, 0.35, 0.12, 14);          // beat-locked: 18.56 first promise
+      sfx("impactBell_heavy_000.ogg", 22.37, 0.38, 1.48, 15); // beat-locked: 22.37 wordmark
+      var host = document.getElementById("sfx");
+      SFX.forEach(function (s, i) {
+        var a = document.createElement("audio");
+        a.id = "sfx-" + i;
+        a.src = "assets/sfx/" + s[0];
+        a.setAttribute("data-start", s[1]);
+        a.setAttribute("data-duration", s[3]);
+        a.setAttribute("data-track-index", s[4]);
+        a.setAttribute("data-volume", s[2]);
+        host.appendChild(a);
+      });
+
+      // ---- Timeline ----
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+      var OUT = "power3.out", SOFT = "power2.out", IO = "power2.inOut";
+      var XF = 0.6; // soft crossfade
+
+      function sceneIn(sel, t) { tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: XF, ease: IO }, t); }
+      function sceneOut(sel, t) { tl.to(sel, { opacity: 0, duration: XF, ease: IO }, t); }
+      function rise(sel, t, d, y) { tl.fromTo(sel, { opacity: 0, y: y || 24, scale: 0.985 }, { opacity: 1, y: 0, scale: 1, duration: d || 0.7, ease: OUT }, t); }
+
+      // music fade in / out
+      tl.fromTo("#bgm", { volume: 0 }, { volume: 0.28, duration: 1.2, ease: "none" }, 0);
+      tl.to("#bgm", { volume: 0, duration: 1.6, ease: "none" }, 23.4);
+
+      // Audio-reactive: the soft blue glow breathes with the music RMS (subtle)
+      var RMS = window.AUDIO_RMS || [];
+      for (var f = 0; f < RMS.length; f++) {
+        tl.set("#glow", { opacity: 0.35 + RMS[f] * 0.55, scale: 1 + RMS[f] * 0.05 }, f / 30);
+      }
+
+      // Scene 1 — hook (0 - 3.0)
+      tl.set("#s1", { opacity: 1 }, 0);
+      rise("#s1-logo", 0.15, 0.8, 18);
+      rise("#s1-l1", 0.55, 0.8, 30);
+      rise("#s1-l2", 1.1, 0.8, 30);
+      sceneOut("#s1", 2.9);
+
+      // Scene 2 — capture (3.0 - 8.74)
+      sceneIn("#s2", 3.0);
+      tl.fromTo("#phone", { y: 40, scale: 0.97 }, { y: 0, scale: 1, duration: 1.0, ease: OUT }, 3.0);
+      tl.set("#caps", { y: -92 }, 0);
+      tl.set("#cap-new", { opacity: 0 }, 0);
+      rise("#s2-h", 3.3, 0.8, 26);
+      rise("#s2-p", 3.75, 0.8, 20);
+      tl.set("#field-ph", { opacity: 0 }, TYPE_START);
+      for (var i = 0; i < THOUGHT.length; i++) {
+        tl.set("#ch-" + i, { opacity: 1 }, TYPE_START + i * TYPE_STEP);
+      }
+      tl.to("#save-dim", { opacity: 0, duration: 0.2, ease: SOFT }, TYPE_START + 0.1);
+      // tap Save
+      tl.to("#save", { scale: 0.94, duration: 0.12, ease: SOFT }, 5.7);
+      tl.to("#save", { scale: 1, duration: 0.25, ease: OUT }, 5.82);
+      tl.to("#field-text", { opacity: 0, duration: 0.2, ease: SOFT }, 5.84);
+      tl.to("#field-ph", { opacity: 1, duration: 0.2, ease: SOFT }, 5.98);
+      tl.to("#save-dim", { opacity: 1, duration: 0.2, ease: SOFT }, 5.9);
+      tl.fromTo("#toast", { opacity: 0, y: 22, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: OUT }, 5.9);
+      tl.to("#caps", { y: 0, duration: 0.5, ease: OUT }, 6.0);
+      tl.to("#cap-new", { opacity: 1, duration: 0.4, ease: SOFT }, 6.1);
+      sceneOut("#s2", 8.44);
+
+      // Scene 3 — desk inbox (8.74 - 11.5) // beat-locked: 8.74s
+      sceneIn("#s3", 8.44);
+      rise("#s3-cap", 8.74, 0.7, 22);
+      tl.fromTo("#win-wrap", { y: 60, scale: 0.97 }, { y: 0, scale: 1, duration: 1.1, ease: OUT }, 8.6);
+      tl.to("#win-wrap", { scale: 1.035, duration: 1.8, ease: "sine.inOut" }, 9.7);
+      tl.fromTo("#row-ring", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: SOFT }, 9.7);
+      sceneOut("#s3", 11.3);
+
+      // Scene 4 — sort (11.5 - 18.02)
+      sceneIn("#s4", 11.3);
+      rise("#s4-h", 11.55, 0.7, 22);
+      rise("#s4-sub", 11.95, 0.7, 18);
+      tl.fromTo("#sort", { y: 40 }, { y: 0, duration: 1.0, ease: OUT }, 11.4);
+      tl.fromTo("#chip-1", { opacity: 0, y: 8, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: OUT }, 12.45);
+      // E press (beat-grid 13.11)
+      tl.fromTo("#act-E .act-hi", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: SOFT }, 13.11);
+      tl.to("#act-E", { scale: 0.96, duration: 0.12, ease: SOFT }, 13.11);
+      tl.to("#act-E", { scale: 1, duration: 0.3, ease: OUT }, 13.23);
+      tl.to("#card-1", { y: 24, opacity: 0, duration: 0.32, ease: SOFT }, 13.3);
+      tl.to("#act-E .act-hi", { opacity: 0, duration: 0.3, ease: SOFT }, 13.6);
+      tl.fromTo("#sort-toast", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.4, ease: OUT }, 13.35);
+      tl.to("#cnt-1", { opacity: 0, duration: 0.2 }, 13.4);
+      tl.to("#cnt-2", { opacity: 1, duration: 0.2 }, 13.5);
+      tl.fromTo("#card-2", { opacity: 0, y: 8, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.32, ease: OUT }, 13.64);
+      tl.fromTo("#chip-2", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.45, ease: OUT }, 14.3);
+      // Undo (beat-grid 16.38): ⌘Z, the event comes back
+      tl.fromTo("#undo-keys", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, ease: OUT }, 15.9);
+      tl.to("#undo-keys .key", { scale: 0.92, backgroundColor: "#e5f0fc", duration: 0.12, ease: SOFT }, 16.38);
+      tl.to("#undo-keys .key", { scale: 1, duration: 0.3, ease: OUT }, 16.5);
+      tl.to("#tt-1", { opacity: 0, duration: 0.15 }, 16.42);
+      tl.to("#tt-2", { opacity: 1, duration: 0.2 }, 16.5);
+      tl.to("#card-2", { opacity: 0, y: -12, duration: 0.25, ease: SOFT }, 16.45);
+      tl.to("#card-1", { opacity: 1, y: 0, duration: 0.35, ease: OUT }, 16.6);
+      tl.to("#cnt-2", { opacity: 0, duration: 0.2 }, 16.5);
+      tl.to("#cnt-1", { opacity: 1, duration: 0.2 }, 16.6);
+      sceneOut("#s4", 17.72);
+
+      // Scene 5 — pair + accessibility (18.02 - 22.2)
+      sceneIn("#s5", 17.72);
+      tl.fromTo("#pair", { y: 40, scale: 0.97 }, { y: 0, scale: 1, duration: 1.0, ease: OUT }, 17.8);
+      rise("#pr-1", 18.02, 0.6, 22);
+      rise("#pr-2", 18.56, 0.6, 22); // beat-locked: 18.56s
+      rise("#pr-3", 19.1, 0.6, 22);
+      sceneOut("#s5", 21.9);
+
+      // Scene 6 — outro (22.2 - 25)
+      sceneIn("#s6", 21.95);
+      rise("#s6-mark", 22.2, 0.8, 26); // lands on 22.37 beat
+      rise("#s6-tag", 22.93, 0.7, 18); // beat-locked: 22.93s
+      rise("#s6-credit", 23.5, 0.7, 12);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
