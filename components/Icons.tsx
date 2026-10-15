@@ -37,6 +37,9 @@ export const CloseIcon = (p: P) => <Svg {...p}><path d="M6 6l12 12M18 6 6 18" />
 export const KeepIcon = (p: P) => <Svg {...p}><path d="M7 3.5h10a1 1 0 0 1 1 1V21l-6-4-6 4V4.5a1 1 0 0 1 1-1Z" /></Svg>;
 export const CloudIcon = (p: P) => <Svg {...p}><path d="M7 18.5h10.5a4 4 0 0 0 .4-8 6 6 0 0 0-11.6 1.6A3.3 3.3 0 0 0 7 18.5Z" /></Svg>;
 export const ArrowRightIcon = (p: P) => <Svg {...p}><path d="M5 12h14M13 6l6 6-6 6" /></Svg>;
+export const RotateLeftIcon = (p: P) => <Svg {...p}><path d="M4.5 4.5v5h5" /><path d="M5 9.5A8 8 0 1 1 4 13" /></Svg>;
+export const RotateRightIcon = (p: P) => <Svg {...p}><path d="M19.5 4.5v5h-5" /><path d="M19 9.5A8 8 0 1 0 20 13" /></Svg>;
+export const DownloadIcon = (p: P) => <Svg {...p}><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14" /></Svg>;
 
 export const KIND_ICON: Record<Kind, (p: P) => React.ReactElement> = {
   task: TaskIcon,
