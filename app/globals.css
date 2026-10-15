@@ -214,3 +214,12 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
   animation-iteration-count: 1 !important;
   transition-property: opacity, color, background-color, border-color !important;
 }
+
+/* === app components === */
+/* The only looping animation: the live-recording dot. */
+@keyframes rec-pulse { 50% { opacity: 0.35; } }
+.rec-dot { animation: rec-pulse 1.2s ease-in-out infinite; }
+/* Sheets/dialogs: enter with the drawer curve; backdrop fades. */
+@keyframes fade-in { from { opacity: 0; } }
+dialog.sheet[open] { animation: rise 280ms var(--ease-drawer) both; }
+dialog.sheet[open]::backdrop { animation: fade-in 200ms var(--ease-out) both; }
