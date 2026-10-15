@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+const site = process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(site),
   title: { default: "Thought Dock", template: "%s · Thought Dock" },
   description: "Capture now. Organize later. A calm place to put every thought down, and a desk to sort it when you're ready.",
   manifest: "/manifest.webmanifest",
