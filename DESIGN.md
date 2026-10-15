@@ -49,7 +49,7 @@ Dials: VARIANCE 4 / MOTION 4 / DENSITY 3.
 | Keep | `K` | file as Idea/Note/Resource (suggested kind preselected) without making it a task |
 | Archive | `A` | out of the way, never deleted; restorable from Archive |
 | Undo | `⌘Z` / `U` | reverses the last action, toast shows what was undone |
-| Next / previous | `J`/`K` or `↓`/`↑` | (in Sort: `→`/`←`) |
+| Next / previous | `J` or `↓` / `↑` (K is Keep) | (in Sort: `→`/`←`) |
 | Capture | `N` or `⌘K` | focus the Dock |
 | Shortcuts | `?` | sheet listing all keys |
 

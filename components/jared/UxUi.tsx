@@ -45,7 +45,7 @@ const ACTIONS: [string, string[], string][] = [
   ["Keep", ["K"], "File as Idea, Note, or Resource without making a task"],
   ["Archive", ["A"], "Out of the way, never deleted, restorable"],
   ["Undo", ["⌘Z", "U"], "Reverses the last action; a toast says what was undone"],
-  ["Next / previous", ["J", "K", "↓", "↑"], "Moves instantly, no animation. In Sort: → and ←"],
+  ["Next / previous", ["J", "↓", "↑"], "Moves instantly, no animation. In Sort: → and ←"],
   ["Capture", ["N", "⌘K"], "Focuses the Dock"],
   ["Shortcuts", ["?"], "Sheet listing every key"],
 ];
