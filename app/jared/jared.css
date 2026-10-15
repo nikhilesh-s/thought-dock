@@ -1,0 +1,35 @@
+/* /jared only. Hover effects are gated to real pointers (DESIGN.md motion rules). */
+@media (hover: hover) and (pointer: fine) {
+  .hover-dim:hover { opacity: 0.86; }
+  .hover-soft:hover { background-color: var(--bg-2); }
+  .hover-underline:hover { text-decoration-color: currentColor; }
+  .nav-link:hover { color: var(--text); }
+}
+
+.nav-link[aria-current="true"] { color: var(--text); }
+.nav-link[aria-current="true"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 12px 0 12px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text);
+}
+
+/* Horizontal scroller without a visible scrollbar; still keyboard + touch scrollable. */
+.no-bar { scrollbar-width: none; }
+.no-bar::-webkit-scrollbar { display: none; }
+
+html:has(.jared-page) { scroll-behavior: smooth; scroll-padding-top: 7rem; }
+@media (prefers-reduced-motion: reduce) {
+  html:has(.jared-page) { scroll-behavior: auto; }
+}
+:root[data-motion="reduce"]:has(.jared-page) { scroll-behavior: auto; }
+
+/* Inline technical drawing: ink and paper follow the theme. */
+.dock-drawing svg { width: 100%; height: auto; display: block; }
+
+/* Sticky-note wall: a hair of rotation so it reads as a wall, not a grid. */
+.note-tilt:nth-child(3n + 1) { transform: rotate(-0.6deg); }
+.note-tilt:nth-child(3n + 2) { transform: rotate(0.5deg); }
+@media (prefers-reduced-motion: reduce) { .note-tilt { transform: none !important; } }
