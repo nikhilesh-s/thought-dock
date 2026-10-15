@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "train": "node scripts/train-classifier.ts",
+    "test:model": "node scripts/classifier.test.ts"
   },
   "dependencies": {
     "@upstash/redis": "^1.39.0",
