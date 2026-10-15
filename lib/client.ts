@@ -99,6 +99,7 @@ export function useDock(id: string | null, pollMs = 4000) {
   const queue = useRef<Op[]>([]);
   const flushing = useRef(false);
   const server = useRef<Dock | null>(null);
+  const flushRef = useRef<() => void>(() => {});
 
   const recompute = useCallback(() => {
     if (server.current) setDock(applyLocal(server.current, queue.current));
@@ -121,9 +122,11 @@ export function useDock(id: string | null, pollMs = 4000) {
       setState("offline");
     } finally {
       flushing.current = false;
-      if (queue.current.length && navigator.onLine) setTimeout(flush, 3000);
+      if (queue.current.length && navigator.onLine) setTimeout(() => flushRef.current(), 3000);
     }
   }, [id]);
+
+  useEffect(() => { flushRef.current = flush; }, [flush]);
 
   const load = useCallback(async () => {
     if (!id) return;
@@ -145,6 +148,8 @@ export function useDock(id: string | null, pollMs = 4000) {
     queue.current = read<Op[]>(queueKey(id), []);
     const cached = read<Dock | null>(cacheKey(id), null);
     if (cached) { server.current = cached; recompute(); }
+    // Syncing with an external store (server + localStorage); setState happens after awaits.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     load().then(flush);
     const t = setInterval(() => { if (document.visibilityState === "visible" && !flushing.current) load(); }, pollMs);
     const on = () => { load(); flush(); };
