@@ -1,0 +1,691 @@
+text,label
+"finish ochem hw before fri",task
+"email prof lee about missing lab thurs",task
+"pset 4 due tmrw need to start",task
+"buy printer paper",task
+"renew library books",task
+"submit fafsa!!",task
+"call mom back",task
+"do laundry tonight",task
+"return the calc textbook to bookstore",task
+"finish lab report for chem 1a",task
+"study for bio midterm",task
+"read ch 5-7 for hist",task
+"pay phone bill",task
+"sign up for spring classes",task
+"reply to sarahs text",task
+"fix bug in the robot arm code",task
+"upload essay to canvas",task
+"print out the rubric",task
+"ask TA abt regrade on q3",task
+"need to get my transcript sent to ucla",task
+"make flashcards for spanish vocab",task
+"clean room before parents visit",task
+"apply for the nsf reu",task
+"cancel spotify trial before it charges me",task
+"get groceries - eggs milk rice",task
+"schedule advising appt",task
+"finish personal insight q #2",task
+"turn in physics pset",task
+"refill prescription",task
+"update resume w the internship",task
+"write thank you note to mr garcia for rec letter",task
+"practice presentation for comm 1",task
+"email group abt splitting up the slides",task
+"review lecture 12 notes before quiz",task
+"dont forget to venmo jake for pizza",task
+"finish cs61b proj 2",task
+"go thru inbox and unsubscribe from stuff",task
+"get flu shot at health center",task
+"check if the bus pass got renewed",task
+"ask counselor about transfer reqs for engr",task
+"redo the integral problems i got wrong",task
+"order the lab goggles",task
+"finish discussion post for psych by 11:59",task
+"submit timesheet for work study",task
+"make a study schedule for finals",task
+"backup laptop",task
+"return amazon package",task
+"draft cover letter for the lab job",task
+"need to finish math 3a webwork",task
+"fill out the housing form",task
+"grade the quizzes for tutoring",task
+"book dentist appt",task
+"respond to the club email about budget",task
+"start the english essay outline",task
+"Turn in permission slip",task
+"go to office hours to ask about hw 6",task
+"charge calculator batteries",task
+"fix my github readme",task
+"merge the branch before demo",task
+"get a notarized copy of id for the application",task
+"reread the prompt for the essay",task
+"email financial aid about my award letter",task
+"write 500 words of the research paper tonight",task
+"memorize the krebs cycle",task
+"send ben the notes from today",task
+"rsvp for the career fair",task
+"install matlab on laptop",task
+"pick up package from mailroom",task
+"finish reading frankenstein",task
+"complete the safety training module",task
+"water the plants",task
+"todo: outline for history dbq",task
+"study ch 3 thermo",task
+"make appt w writing center",task
+"get lab notebook signed",task
+"finish the ucsd app by nov 30",task
+"apply to 3 internships this week",task
+"move my stuff out of the locker",task
+"need to buy a blue book for the exam",task
+"debug segfault in hw3",task
+"print boarding pass",task
+"hw: problems 1-15 odd sec 4.2",task
+"proofread jess's essay like i promised",task
+"renew drivers license",task
+"drop the ge class before the deadline",task
+"ask dad to send the tax forms",task
+"clean up the shared google drive folder",task
+"finish calc review sheet",task
+"call the dmv",task
+"Need to text the group chat about meeting time",task
+"write up minutes from robotics meeting",task
+"file the expense report for club",task
+"return lab key to stockroom",task
+"look over midterm corrections",task
+"finish poster for symposium",task
+"reset canvas password",task
+"make doctor appt re: knee",task
+"pack for the trip",task
+"buy bday gift for maya",task
+"practice piano 30 min",task
+"submit the scholarship essay",task
+"email registrar re wrong grade",task
+"rewrite intro paragraph",task
+"go to the gym",task
+"do the ochem reading before lecture",task
+"annotate the reading for phil 10",task
+"get signatures for the add form",task
+"order parts for the robot from digikey",task
+"complete course eval for math",task
+"pay rent",task
+"finish the solidworks assignmnt",task
+"hand in lab 4 writeup",task
+"schedule a meeting w my advisor",task
+"must finish apush notes",task
+"reply to the recruiter",task
+"prep questions for the interview",task
+"finish anki reviews",task
+"fix the wifi on my desktop",task
+"bring calculator tmrw!!",task
+"study spanish verbs",task
+"need to send fafsa verification docs",task
+"write the methods section",task
+"send the survey link to my class",task
+"download the lecture slides before the exam",task
+"grab coffee for study group lol",task
+"check grades on canvas",task
+"email jordan the zoom link",task
+"finish ece 100 hw due wed",task
+"turn in hw by 5pm",task
+"submit app before midnight friday",task
+"remember to email Professor Lee about missing Thursday's lab",task
+"UC transfer application due Nov 30, need to finish personal insight questions",task
+"gotta finish teh bio worksheet",task
+"wash the dishes b4 roomie gets back",task
+"take out trash",task
+"fill in the lab survey https://forms.gle/x7Ka9 before fri",task
+"cite sources for the hist paper",task
+"buy a new charger",task
+"finish the cad model and export stl",task
+"learn the lines for drama by tues",task
+"text kev back abt the ride",task
+"study bio midterm tues 9am",event
+"study group for engr 1 thurs 6pm library rm 204",event
+"bio midterm mon 9am",event
+"dentist 3:30 tues",event
+"club meeting wed 7pm in student union",event
+"career fair oct 22 in the gym",event
+"office hours w prof kim 2-3 fri",event
+"dinner w mom sunday",event
+"robotics practice sat 10am",event
+"movie night at jakes 8pm",event
+"physics final dec 12 8am",event
+"tutoring session tmrw at 4",event
+"shift at work 5-9 thurs",event
+"lab section moved to room 310 this week",event
+"interview w google recruiter 11am monday",event
+"soccer game sat 1pm vs de anza",event
+"flight to sfo nov 22 6:45am",event
+"advising appt 10/28 @ 1:30",event
+"hackathon this weekend at ucb",event
+"guest lecture on fusion energy friday 12pm room 101",event
+"study session w priya tmrw after class",event
+"birthday party for maya saturday night",event
+"ochem exam 2 next tues",event
+"chem lab practical 11/3",event
+"zoom call w research group 4pm",event
+"haircut thurs 2pm",event
+"concert at the greek oct 30",event
+"orientation for transfer students aug 20",event
+"coffee chat w alumni tues 3pm starbucks",event
+"debate tournament nov 8-9",event
+"group project meeting sunday 2pm on discord",event
+"thanksgiving break starts 11/26",event
+"math 3a quiz on wed",event
+"info session for study abroad thurs 5pm",event
+"doctor appt fri morning",event
+"volunteering at food bank sat 9-12",event
+"cs club workshop on git 6pm tonight",event
+"meeting w ta at 3 in the lab",event
+"game night @ dorm lounge 9pm",event
+"hike w roommates sunday morning",event
+"job fair at de anza 10/24 10am-2pm",event
+"presentations in comm class start monday",event
+"finals week dec 9-13",event
+"spanish oral exam thurs 11:15",event
+"lunch w dr patel noon wed",event
+"church sun 10am",event
+"band rehearsal tues & thurs 7-9",event
+"transfer workshop tmrw 1pm room 2402",event
+"tour of ucsd campus nov 2",event
+"call w internship mentor at 5pm",event
+"dads bday dinner fri 7",event
+"graduation june 14",event
+"webinar on resume tips thurs 6pm",event
+"mock interview at career center 10am",event
+"the fair is at the quad noon-3",event
+"calc review session tonight 7pm s34",event
+"basketball pickup 4pm at the rec",event
+"midterm moved to next thurs!!",event
+"lab meeting every monday 9am",event
+"piano recital nov 16 3pm",event
+"apt viewing sat 11am on 5th st",event
+"bus leaves at 7:10 for the field trip",event
+"ap exam may 6 8am",event
+"sat test dec 7",event
+"networking mixer at engineering bldg fri 4-6",event
+"group dinner at the pho place 6:30",event
+"dmv appt 8:40am mon",event
+"vaccine appt walgreens 2pm",event
+"robotics competition in sacramento feb 15",event
+"escape room w friends sat 8",event
+"TA review sesh sun 5pm zoom",event
+"seminar: ML in biology thurs 4pm bldg 7",event
+"movie premiere friday 10pm",event
+"meeting w counselor oct 30 at 2",event
+"club fair next wed in the quad",event
+"yoga class 7am",event
+"stats exam 2 on 11/5 in class",event
+"standup w project team 9:30 daily",event
+"farmers market sunday morning w sam",event
+"science olympiad regionals march 1",event
+"open mic at the cafe thurs night",event
+"parents flight lands 3pm sat",event
+"career panel thurs 12:30 room 120",event
+"memorial service saturday 11am",event
+"study break pizza in the lounge 9pm",event
+"swim practice 6am mon wed fri",event
+"philosophy club discussion tues 6",event
+"symposium poster session dec 3 1-4pm",event
+"zoom interview with UCLA honors 10:00 am",event
+"history final 12/16 at 8",event
+"meet up w alex at library at 2",event
+"networking lunch tmrw noon",event
+"bio lab moved to tue this week",event
+"tutoring at 4 in the learning center",event
+"conference call w nasa team 11",event
+"homecoming football game fri 7pm",event
+"office hrs canceled tmrw, moved to thurs 3",event
+"writing center appt 1:00 wed",event
+"mentoring meeting every other thurs",event
+"date night sat 7:30",event
+"calc midterm on halloween lol",event
+"jury duty nov 12",event
+"fusion 360 workshop tues 5pm makerspace",event
+"study abroad info night 10/29",event
+"cousins wedding in LA dec 20",event
+"hackathon kickoff friday 6pm",event
+"bake sale fundraiser thurs 11-2",event
+"eye exam at 4:15",event
+"team dinner after the game",event
+"final presentation for capstone dec 5 10am",event
+"counseling appt thurs",event
+"game vs foothill 7pm",event
+"math circle every wed 4pm",event
+"linkedin workshop @ career center 3pm",event
+"ucla admit day april 12",event
+"midterm review w group fri 6 in rm 13",event
+"robotics outreach at the elementary school sat 9am",event
+"visiting grandma this weekend",event
+"graduation rehearsal june 12 2pm",event
+"stem night at the library thurs",event
+"orientation for new tutors mon 8/26",event
+"lab safety training friday 9am mandatory",event
+"3pm meeting w advisor in admin bldg",event
+"thursday 6pm study group",event
+"jam session at noahs 8 tonight",event
+"interview at the coffee shop tmrw 10",event
+"party at the beach house sat",event
+"ee 40 exam next monday in class",event
+"career fair https://handshake.com/events/123 thurs 10am",event
+"robotics team mtg thurs 4 in the shop",event
+"wednsday 5pm club officer meeting",event
+"econ final is the 18th at 11:30",event
+"dinner at auntie's place sunday 6",event
+"lecture in rm 201 instead of 105 today",event
+"pickup soccer at 5 on the turf",event
+"physics lab tmrw 1-4",event
+"premed club social friday night at the boba place",event
+"campus tour for my cousin sat 10",event
+"rehearsal tonight 7 til 10",event
+"what if the robot arm used a cheaper servo and a 3D printed gearbox",idea
+"app that matches study partners by class schedule",idea
+"maybe do my history project on the dust bowl",idea
+"could make a youtube channel explaining ochem mechanisms",idea
+"idea: club fundraiser selling boba",idea
+"startup idea - uber for textbook swaps",idea
+"essay angle: write about grandpa's garden",idea
+"maybe start a podcast w jake",idea
+"what if we used arduino instead of raspberry pi",idea
+"could try pomodoro w 50/10 instead",idea
+"use color coded tabs for each class??",idea
+"science fair idea - microplastics in the local creek",idea
+"make a discord bot that reminds ppl of deadlines",idea
+"hmm maybe switch major to bioengineering",idea
+"game where you play as a white blood cell",idea
+"could do the capstone on a solar powered phone charger",idea
+"what if campus had a free fridge",idea
+"short story about a girl who can hear plants",idea
+"maybe a newsletter for transfer students",idea
+"personal statement could open with the fire",idea
+"band name: the late submissions",idea
+"we should host a hackathon for high schoolers",idea
+"track my sleep and correlate w grades?",idea
+"build a website for moms bakery",idea
+"might be cool to learn japanese over summer",idea
+"what if notes app auto sorted stuff",idea
+"tshirt design for robotics team w gears",idea
+"maybe propose a study of caffeine and reaction time for psych lab",idea
+"combine the two clubs for a bigger event",idea
+"poem idea about the 4am library",idea
+"could sell my old calc notes",idea
+"idea for capstone: water quality sensor network",idea
+"maybe try a standing desk",idea
+"what if the dock had a dark mode toggle",idea
+"an app to split grocery costs w roommates",idea
+"research q: does music tempo affect typing speed",idea
+"open a tutoring service for intro chem",idea
+"video concept: timelapse of campus from dawn to night",idea
+"maybe write my english paper on frankenstein as an ai metaphor",idea
+"instagram account for campus cats",idea
+"rocket club could do a payload w a camera",idea
+"might apply to schools in the uk too",idea
+"could use a spreadsheet to track internship apps",idea
+"board game about the immune system",idea
+"what if we 3d printed the enclosure",idea
+"start a study group for physics 4a?",idea
+"maybe minor in cs",idea
+"business idea: dorm laundry pickup",idea
+"a chrome extension that blocks youtube during study blocks",idea
+"song idea - lofi beat w rain sounds",idea
+"lab idea: test which paper towel absorbs most",idea
+"we could ask local businesses to sponsor robotics",idea
+"plot twist: the narrator is the dog",idea
+"for the speech maybe use a personal story",idea
+"hmm what if i did a gap semester",idea
+"use machine learning to predict bus delays",idea
+"mural for the stem center",idea
+"maybe drop the second job and focus on school",idea
+"logo w a lighthouse??",idea
+"halloween costume: schrodingers cat",idea
+"research idea: algae biofuel at home",idea
+"a map of all the quiet study spots on campus",idea
+"could restructure the essay chronologically",idea
+"make the club meetings hybrid?",idea
+"what if i interviewed my grandma for the oral history project",idea
+"cookbook for broke college students",idea
+"thesis idea: social media and sleep",idea
+"swap the motor driver for an h-bridge maybe",idea
+"idea - weekly review every sunday",idea
+"might be fun to do a 5k for charity",idea
+"could learn to solder over break",idea
+"what if we made the presentation a skit",idea
+"app idea: flashcards from lecture recordings",idea
+"maybe film a mini documentary on the bus system",idea
+"garden on the balcony?",idea
+"team name could be null pointers",idea
+"smart plant waterer project??",idea
+"should we pivot the app to just high schoolers",idea
+"maybe use firebase instead of our own server",idea
+"comic about a stressed out mitochondria",idea
+"a website that ranks campus microwaves lol",idea
+"could try a reverse outline for the paper",idea
+"what if the robot followed a line w ir sensors",idea
+"portfolio site w all my cad projects",idea
+"maybe pitch it to the entrepreneurship club",idea
+"photo series: hands of essential workers",idea
+"fundraiser idea - car wash",idea
+"for the spanish project, cook a dish and film it",idea
+"weather station from the leftover sensors?",idea
+"scholarship essay idea: being the family translator",idea
+"what if lectures were 2x speed by default",idea
+"maybe write a blog about transferring",idea
+"essay hook - start with a question",idea
+"vr tour of campus for new students",idea
+"could make the dashboard show streaks",idea
+"brainstorm: ways to reduce cafeteria waste",idea
+"maybe do the summer research instead of the job",idea
+"kinetic sculpture powered by wind",idea
+"an alarm clock that makes you solve a math problem",idea
+"robot that sorts recycling",idea
+"what if i combined the stats project w my soccer data",idea
+"maybe ask to lead the outreach program",idea
+"wild idea: apply to mit just to see",idea
+"newsletter w weekly scholarships",idea
+"club merch - stickers?",idea
+"a reading list bot for discord",idea
+"could analyze my spotify data for the stats final",idea
+"ted talk on failing chem and coming back",idea
+"might switch to digital notes only",idea
+"story set in a dorm where time loops during finals week",idea
+"maybe host the study group on sundays instead",idea
+"what if the meeting was at 6pm instead of 4",idea
+"our promo vid could copy the style of https://youtube.com/watch?v=q8x2",idea
+"a lamp that dims as a deadline gets closer",idea
+"maybe redesign the club website",idea
+"could use legos to prototype the gearbox",idea
+"want to try making a short film this summer",idea
+"thinking about starting a robotics team at my old hs",idea
+"could turn my lab report into a poster",idea
+"neural net to classify bird calls",idea
+"maybe the app should have a focus mode",idea
+"random thought: a cafe that's also a study hall",idea
+"maybe propose a 4 day week for the club",idea
+"art class idea - self portrait from old receipts",idea
+"what about a peer mentoring program for first gens",idea
+"could do the econ paper on rent control",idea
+"bike powered phone charger",idea
+"maybe volunteer abroad next summer",idea
+"tiktok series: one chem fact a day",idea
+"what if grades were replaced by portfolios",idea
+"ooh what if the club did a mystery night",idea
+"potential paper topic: why cities have pigeons",idea
+"thought: shared calendar for the whole floor",idea
+"maybe the gearbox should be planetary",idea
+"concept for the poster - make it look like a subway map",idea
+"what if i biked to school instead",idea
+"possible name for the app: brain dump",idea
+"https://www.nsf.gov/funding/ undergrad research link a TA mentioned",resource
+"Fusion 360 multiview drawing tutorial",resource
+"khan academy has a good vid on integration by parts",resource
+"https://ocw.mit.edu/courses/18-06 linear algebra",resource
+"organic chem tutor yt channel for ochem",resource
+"desmos for graphing",resource
+"https://docs.python.org/3/tutorial/",resource
+"pauls online math notes - calc 2",resource
+"zotero for citations",resource
+"textbook pdf from canvas https://canvas.school.edu/files/123",resource
+"anki deck for mcat bio",resource
+"crash course psych playlist",resource
+"3blue1brown essence of linear algebra",resource
+"https://www.overleaf.com latex template for lab reports",resource
+"wolfram alpha step by step",resource
+"purdue owl for mla formatting",resource
+"good article on pomodoro https://todoist.com/productivity-methods/pomodoro-technique",resource
+"book rec: atomic habits",resource
+"https://github.com/jwasham/coding-interview-university",resource
+"chem libretexts page on sn1 vs sn2",resource
+"quizlet set for spanish ch 4",resource
+"professors slides on vectors",resource
+"reddit thread on transfer apps r/transfer",resource
+"https://www.youtube.com/watch?v=abc123 fourier series explained",resource
+"scholarship database: fastweb",resource
+"cs50 lectures free on edx",resource
+"tinkercad for quick 3d models",resource
+"notion template for semester planning",resource
+"handshake for internships",resource
+"club drive https://drive.google.com/drive/folders/xyz",resource
+"grammarly",resource
+"neetcode roadmap for leetcode",resource
+"https://www.desmos.com/calculator",resource
+"study guide the ta posted",resource
+"jstor article on the dust bowl",resource
+"https://arxiv.org/abs/1706.03762 attention paper",resource
+"podcast: hidden brain episode on habits",resource
+"free solidworks license thru school",resource
+"ptable.com interactive periodic table",resource
+"slader for textbook solutions",resource
+"the princeton review ap bio book",resource
+"https://www.coursera.org/learn/machine-learning",resource
+"mit opencourseware 8.01 physics lectures",resource
+"ucla transfer admission guide pdf",resource
+"tool for making diagrams: draw.io",resource
+"assist.org for transfer articulation",resource
+"citation machine",resource
+"ted talk on growth mindset",resource
+"sparknotes for frankenstein",resource
+"good yt vid on free body diagrams",resource
+"https://leetcode.com/problemset/",resource
+"professor leonard calc lectures",resource
+"the rubric doc on canvas",resource
+"freecodecamp responsive web design course",resource
+"open library for free textbooks",resource
+"https://openstax.org/details/books/college-physics",resource
+"online stopwatch for pomodoros",resource
+"figma for wireframes",resource
+"arduino forum thread on servo jitter",resource
+"writing center handout on thesis statements",resource
+"big list of scholarships https://www.scholarships.com",resource
+"dr mikes anatomy videos",resource
+"springer link to the paper prof mentioned",resource
+"musescore for sheet music",resource
+"khan academy sat practice",resource
+"sarah's shared google doc w lecture notes",resource
+"https://www.reddit.com/r/learnprogramming/",resource
+"hyperphysics site for e&m",resource
+"""how to read a paper"" by keshav",resource
+"mathway",resource
+"obsidian for notes",resource
+"kaggle titanic dataset",resource
+"epa water quality data portal",resource
+"https://www.digikey.com",resource
+"cal grant info page",resource
+"good stack overflow answer on async await",resource
+"ib chem textbook pdf",resource
+"tutor's website w practice problems",resource
+"apa format cheat sheet",resource
+"https://excalidraw.com",resource
+"list of research labs from the dean",resource
+"periodic table app",resource
+"symbolab integral calculator",resource
+"vid on how to tie a tie for interviews lol",resource
+"https://www.ted.com/talks/the_power_of_vulnerability",resource
+"youtube: lofi girl for studying",resource
+"coffee break spanish podcast",resource
+"nasa open data portal",resource
+"desmos geometry tool",resource
+"class discord server invite discord.gg/k3x9",resource
+"pubmed for the bio lit review",resource
+"hackerrank 30 days of code",resource
+"https://www.w3schools.com/js/",resource
+"good twitter thread about grad school apps",resource
+"matlab onramp free course",resource
+"orgo as a second language - book the tutor recommended",resource
+"google scholar alerts",resource
+"https://www.onshape.com free cad",resource
+"typingclub for typing speed",resource
+"ucsd career center website",resource
+"libretexts open textbooks",resource
+"calc 3 notes from lamar university",resource
+"https://www.cdc.gov/flu/",resource
+"duolingo for japanese",resource
+"investopedia for econ terms",resource
+"mendeley citation manager",resource
+"robot arm repo https://github.com/team/robot-arm",resource
+"pdf of last years midterm",resource
+"harvard free intro to cs course",resource
+"kurzgesagt video on the immune system",resource
+"spotify deep focus playlist",resource
+"brilliant.org",resource
+"article: how to write a personal statement",resource
+"club signup form https://forms.gle/abc",resource
+"bio prof's lab website",resource
+"inkscape free vector tool",resource
+"https://www.wolframalpha.com",resource
+"rate my professor page for math 1d",resource
+"ap central practice exams",resource
+"oscilloscope guide the ta shared",resource
+"the elements of style",resource
+"book of proof - free online textbook",resource
+"canva for the poster",resource
+"https://www.mathsisfun.com",resource
+"really good diagram of the nephron",resource
+"https://www.ucop.edu/transfer",resource
+"geogebra",resource
+"lab manual bit.ly/chemlab1a",resource
+"nyt article on ai in education https://www.nytimes.com/2026/03/ai-classrooms",resource
+"cheat sheet for git commands",resource
+"www.purplemath.com for algebra review",resource
+"thermo lecture recordings on yuja",resource
+"medium post on react hooks",resource
+"https://www.khanacademy.org/science/organic-chemistry",resource
+"the citation generator mr hall uses: scribbr",resource
+"good channel for circuits: eevblog",resource
+"im so tired today",note
+"locker combo 12-34-08",note
+"prof said the final is cumulative",note
+"wifi password for the lab is on the whiteboard",note
+"stressed about my ochem grade",note
+"ta said lab reports can be 1 day late w no penalty",note
+"gpa is 3.4 rn",note
+"felt really good after the run",note
+"room 204 is always freezing",note
+"parking lot b is closed for construction",note
+"moms flight number is ua 455",note
+"i think i failed that quiz",note
+"jake is allergic to peanuts",note
+"professor lee prefers email over canvas msgs",note
+"bookstore only buys back books during finals",note
+"anxious about transfer decisions",note
+"cafeteria closes at 7 on weekends",note
+"got a b+ on the essay",note
+"print quota resets every month",note
+"kinda lonely this week",note
+"deadline for the ucs is nov 30",note
+"health center is free for students",note
+"my advisor is dr. nguyen",note
+"the 22 bus is always late",note
+"TIL mitochondria have their own dna",note
+"shoe size 9.5 for ref",note
+"roommate is gone this weekend",note
+"grades post on dec 20",note
+"chem lab is worth 25% of the grade",note
+"feel like im behind in every class",note
+"vending machine on floor 2 takes cards",note
+"midterm avg was 62",note
+"actually liked todays lecture on entropy",note
+"sam's bday is march 3",note
+"tutoring center has free printing",note
+"prof kim curves the class",note
+"i work better in the mornings",note
+"fafsa says im eligible for pell grant",note
+"the lab is in bldg 7 not 8",note
+"overwhelmed again",note
+"interview went ok i think",note
+"coffee makes me jittery after 2 cups",note
+"club budget is $300 for the year",note
+"grandmas recipe: 2 cups flour 1 tsp salt",note
+"textbook answer key for ch 4 has errors",note
+"the q3 answer was 4.2 m/s",note
+"note to self: i get headaches when i skip lunch",note
+"the quiz is open book",note
+"apparently drop deadline is friday",note
+"class starts at 8 now not 9",note
+"lecture hall is ross 130",note
+"feeling proud of the robot demo",note
+"sleep schedule is a mess",note
+"elevator in the science bldg is broken",note
+"prof said no calculators on the final",note
+"sarah got into ucla!!",note
+"library 3rd floor is the silent floor",note
+"ochem is harder than i expected",note
+"rent went up 50 bucks",note
+"i should probably sleep more",note
+"worried about money this month",note
+"bus pass covers caltrain too",note
+"the essay prompt is about community",note
+"office hours are in the basement now",note
+"we lost the game 3-2",note
+"im allergic to penicillin",note
+"tutoring pays 18/hr",note
+"math dept has free snacks on fridays",note
+"kinda want to quit work but cant",note
+"the TA's name is marco",note
+"cs61b autograder runs at midnight",note
+"transfer gpa needs to be 3.0 min for engr",note
+"feel burnt out",note
+"my laptop fan is making a weird noise",note
+"seat 14 in the lecture hall has a broken desk",note
+"answer key gets posted after the due date",note
+"jake still owes me 20",note
+"that interview question about conflict threw me off",note
+"so happy w how the poster turned out",note
+"course is pass/no pass this term",note
+"hw is graded on completion",note
+"enzyme activity peaks at 37C",note
+"prof said 3 absences max",note
+"garage code 4512",note
+"mentor said to focus on projects not gpa",note
+"nervous for tmrw",note
+"lab partner is kinda flaky",note
+"the curve last year was +8",note
+"i always forget my umbrella",note
+"quote from lecture: chemistry is just electrons being dramatic",note
+"library printer needs your student id",note
+"im #5 on the waitlist for math 1d",note
+"dining dollars will run out in nov at this rate",note
+"calc 2 is mostly series stuff",note
+"got the internship!!!",note
+"grader takes off points for missing units",note
+"today was rough",note
+"sat score 1380",note
+"miss home a lot lately",note
+"class is canceled today",note
+"the stockroom closes at 4",note
+"the ochem tutor is only there mon and wed",note
+"phone screen cracked again",note
+"shuttle runs every 15 min",note
+"group partner said she'd do the intro",note
+"wifi is so bad in the dorm",note
+"i think im getting sick",note
+"prof posted the grades",note
+"noise complaint from the neighbor again",note
+"im 2 units short for the transfer requirement",note
+"robot arm max load is 500g",note
+"hw 5 key had a typo in q2",note
+"my resume is in the jobs folder on desktop",note
+"heard the final is mostly multiple choice",note
+"ochem lecture notes are in the blue notebook",note
+"left my charger at the library ugh",note
+"kinda excited for break",note
+"vending machine ate my dollar",note
+"3 more weeks till finals",note
+"my roommate snores so loud",note
+"bike lock combo 0420",note
+"ugh the essay got a c",note
+"dr patel is on sabbatical next year",note
+"robotics team won regionals last year",note
+"i keep procrastinating on everything",note
+"coffee shop on 3rd has outlets",note
+"blood type o+",note
+"why do i always start projects the night before",note
+"the speed of sound is ~343 m/s at room temp",note
+"turns out the lab doesnt need a cover page",note
+"maya said the ochem midterm was brutal",note
+"syllabus says late hw is -10% per day",note
+"my sister starts college next fall",note
+"i did not sleep at all lol",note
+"office hours were actually super helpful today",note
+"the mailroom is closed sundays",note
+"https://canvas.school.edu says my grade is 87 now",note
