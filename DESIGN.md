@@ -18,7 +18,7 @@ Dials: VARIANCE 4 / MOTION 4 / DENSITY 3.
 ## Tokens (in `app/globals.css`; use them, never invent colors)
 - Surfaces: `bg-bg` page (#f5f5f7 / #000), `bg-surface` cards (#fff / #1c1c1e), `bg-surface-2`, `bg-raised`, `bg-sidebar` (translucent, with `backdrop-blur-xl`), hairlines `border-line`.
 - Text: `text-text`, `text-text-2`, `text-muted` (secondary only, ≥13px, never body copy).
-- Accent: `accent` (#0071e3 / #2997ff). One accent: primary action, selection, focus ring, links. `bg-accent-soft` for selected rows.
+- Accent: `accent` (#0066cc / #2997ff). One accent: primary action, selection, focus ring, links. `bg-accent-soft` for selected rows.
 - Primary CTA on marketing pages: black pill `bg-ink text-on-ink` (inverts in dark).
 - Kind tints `text-k-task|event|idea|resource|note`: only ever next to the kind's icon AND its word. Never color-only.
 - No red anywhere for overdue or unfinished work. Use the word ("Was due Tue") in `text-muted`. `text-warn` only for real errors (sync failed).

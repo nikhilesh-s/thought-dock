@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "train": "node scripts/train-classifier.ts",
-    "test:model": "node scripts/classifier.test.ts"
+    "test:model": "node scripts/classifier.test.ts",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "test": "npm run test:model && npm run check:contrast"
   },
   "dependencies": {
     "@upstash/redis": "^1.39.0",
