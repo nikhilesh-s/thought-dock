@@ -1,0 +1,44 @@
+/* Landing-only motion. Two things move on this page, both once:
+   1. sections fade up as they scroll into view (Reveal.tsx arms them),
+   2. the hero thought travels from the phone into the desk inbox on load. */
+
+.reveal {
+  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+}
+.reveal[data-pending] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+/* Hero: the ghost card uses cqw from the hero stage (an inline-size container with a fixed
+   aspect ratio), so start/end points stay locked to the mocks at every width. */
+.ghost {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24.8cqw;
+  pointer-events: none;
+  opacity: 0;
+  animation: travel 800ms var(--ease-in-out) 350ms both;
+}
+@keyframes travel {
+  0% { opacity: 0; transform: translate(2.9cqw, 17cqw) scale(0.98); }
+  12% { opacity: 1; }
+  82% { opacity: 1; transform: translate(34.25cqw, 6.4cqw) scale(1); }
+  100% { opacity: 0; transform: translate(34.25cqw, 6.4cqw) scale(1); }
+}
+
+.arrive {
+  animation: arrive 250ms var(--ease-out) 950ms both;
+}
+@keyframes arrive {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghost { display: none; }
+  .arrive { animation: none; }
+}
+:global(html[data-motion="reduce"]) .ghost { display: none; }
+:global(html[data-motion="reduce"]) .arrive { animation: none; }
