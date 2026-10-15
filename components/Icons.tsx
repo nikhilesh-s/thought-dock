@@ -41,6 +41,9 @@ export const ChevronRightIcon = (p: P) => <Svg {...p}><path d="m9.5 5 7 7-7 7" /
 export const TodayIcon = (p: P) => <Svg {...p}><circle cx="12" cy="12" r="4" /><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4" /></Svg>;
 export const KeyboardIcon = (p: P) => <Svg {...p}><rect x="2.5" y="6" width="19" height="12" rx="2.5" /><path d="M6.5 10h1M10 10h1M13.5 10h1M17 10h.5M8 14h8" /></Svg>;
 export const ArrowRightIcon = (p: P) => <Svg {...p}><path d="M5 12h14M13 6l6 6-6 6" /></Svg>;
+export const RotateLeftIcon = (p: P) => <Svg {...p}><path d="M4.5 4.5v5h5" /><path d="M5 9.5A8 8 0 1 1 4 13" /></Svg>;
+export const RotateRightIcon = (p: P) => <Svg {...p}><path d="M19.5 4.5v5h-5" /><path d="M19 9.5A8 8 0 1 0 20 13" /></Svg>;
+export const DownloadIcon = (p: P) => <Svg {...p}><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14" /></Svg>;
 
 export const KIND_ICON: Record<Kind, (p: P) => React.ReactElement> = {
   task: TaskIcon,
