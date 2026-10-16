@@ -18,7 +18,7 @@ What the AI agent actually did, in order. Results are copied from real command o
    - `vercel link`: project `thought-dock`.
    - `vercel integration add upstash/upstash-kv`: resource `thought-dock-kv`, connected to the project; `KV_*` env vars pulled to `.env.local` (gitignored).
 7. **GitHub.** Created 7 labels, 4 sprint milestones, and issues #1–#21: 11 AI-built issues that need a human review tick, plus 10 teammate tasks.
-   - The Projects board needs `gh auth refresh -s project`, which Nikhilesh has to run because it's an interactive login.
+   - Projects board: https://github.com/users/nikhilesh-s/projects/2 (public). Fields: Sprint (4 options) and Status (Todo / In Progress / Needs human review / Done). AI-built issues are in "Needs human review"; teammate tasks are in "Todo".
 8. **Merged subagent branches.**
    - Classifier: 690 rows; held-out accuracy 85.8%.
    - Landing page.

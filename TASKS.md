@@ -1,7 +1,7 @@
 # Tasks
 
 The live backlog is in GitHub Issues, grouped by sprint milestone:
-https://github.com/nikhilesh-s/thought-dock/issues. The board view is in GitHub Projects (see the README).
+https://github.com/nikhilesh-s/thought-dock/issues. Board: https://github.com/users/nikhilesh-s/projects/2 (group by Sprint or Status).
 
 | Sprint | Goal |
 |---|---|
