@@ -58,5 +58,5 @@ npm run train
 - [docs/MODEL_CARD.md](docs/MODEL_CARD.md) · [docs/3D_DOCK.md](docs/3D_DOCK.md) · [docs/MARKETING.md](docs/MARKETING.md)
 
 ## Team tasks
-See the [issues](https://github.com/nikhilesh-s/thought-dock/issues). Anything labeled `team` is
+See the [board](https://github.com/users/nikhilesh-s/projects/2) and [issues](https://github.com/nikhilesh-s/thought-dock/issues). Anything labeled `team` is
 for a person to do. Anything labeled `ai-built` needs a human review before it counts as done.
