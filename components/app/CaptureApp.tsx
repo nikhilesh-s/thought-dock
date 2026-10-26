@@ -9,6 +9,8 @@ import { Toast, useToast } from "./Toast";
 import { downscaleImage, useRecorder } from "./useRecorder";
 import { notifyStored, useSavedDock } from "./store";
 import { ago, startOfToday } from "./dates";
+import { Dialog } from "./Dialog";
+import { PalettePicker } from "./SettingsDialog";
 
 const noSub = () => () => {};
 const pairParam = () => new URLSearchParams(location.search).get("pair");
@@ -49,6 +51,7 @@ function CaptureScreen({ dockId }: { dockId: string }) {
   const [text, setText] = useState("");
   const [photo, setPhoto] = useState<string | null>(null);
   const [photoError, setPhotoError] = useState<string | null>(null);
+  const [colors, setColors] = useState(false);
   const field = useRef<HTMLTextAreaElement>(null);
   const fileInput = useRef<HTMLInputElement>(null);
   const before = useRef(""); // text that was there when recording started
@@ -126,8 +129,17 @@ function CaptureScreen({ dockId }: { dockId: string }) {
     <div className="mx-auto flex min-h-dvh max-w-xl flex-col px-5 pt-[max(env(safe-area-inset-top),12px)] pb-[calc(max(env(safe-area-inset-bottom),16px)+96px)]">
       <header className="flex min-h-11 items-center justify-between gap-3">
         <span className="flex items-center gap-2 text-[15px] font-semibold"><Logo size={22} />Thought Dock</span>
-        <a href="/desk" className="rounded-md px-1 text-[15px] text-accent">Open your desk</a>
+        <span className="flex items-center gap-3">
+          <button type="button" onClick={() => setColors(true)} className="min-h-11 rounded-md px-1 text-[15px] text-accent">Colors</button>
+          <a href="/desk" className="rounded-md px-1 text-[15px] text-accent">Open your desk</a>
+        </span>
       </header>
+      <Dialog open={colors} onClose={() => setColors(false)} title="Colors">
+        <div className="flex flex-col gap-5">
+          <PalettePicker />
+          <div className="flex justify-end"><button type="button" onClick={() => setColors(false)} className="min-h-11 rounded-full bg-ink px-6 font-semibold text-on-ink">Done</button></div>
+        </div>
+      </Dialog>
       <SyncStatus state={state} className="mb-3" />
 
       <main className="flex flex-1 flex-col">

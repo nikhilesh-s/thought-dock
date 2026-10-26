@@ -31,6 +31,28 @@ const PALETTES = [
   { v: "mocha", label: "Mocha night", sw: ["#1a1511", "#2a221a", "#eaaa6e"] },
 ] as const;
 
+export function PalettePicker() {
+  const palette = useStored("td:palette") ?? null;
+  const setPalette = (v: string | null) => setRootPref("palette", v);
+  return (
+    <fieldset>
+      <legend className="text-[15px] font-medium">Colors</legend>
+      <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        {PALETTES.map((pl) => (
+          <label key={pl.label}
+            className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-line px-2.5 text-[14px] has-checked:border-accent has-checked:font-medium has-checked:outline-2 has-checked:outline-accent has-focus-visible:outline-3 has-focus-visible:outline-accent">
+            <input type="radio" name="palette" className="sr-only" checked={palette === pl.v} onChange={() => setPalette(pl.v)} />
+            <span aria-hidden className="flex shrink-0 -space-x-1.5">
+              {pl.sw.map((c) => <span key={c} className="size-4 rounded-full border border-line-strong" style={{ background: c }} />)}
+            </span>
+            {pl.label}
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
 function SettingsBody({ dockId, onNewDock, onClose }: Omit<Props, "open">) {
   const theme = useStored("td:theme") ?? null;
   const palette = useStored("td:palette") ?? null;
@@ -41,26 +63,11 @@ function SettingsBody({ dockId, onNewDock, onClose }: Omit<Props, "open">) {
   const [copied, setCopied] = useState(false);
 
   const setTheme = (v: string | null) => setRootPref("theme", v);
-  const setPalette = (v: string | null) => setRootPref("palette", v);
   const setMotion = (reduce: boolean) => setRootPref("motion", reduce ? "reduce" : null);
 
   return (
     <div className="flex flex-col gap-6">
-      <fieldset>
-        <legend className="text-[15px] font-medium">Colors</legend>
-        <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
-          {PALETTES.map((pl) => (
-            <label key={pl.label}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-line px-2.5 text-[14px] has-checked:border-accent has-checked:font-medium has-checked:outline-2 has-checked:outline-accent has-focus-visible:outline-3 has-focus-visible:outline-accent">
-              <input type="radio" name="palette" className="sr-only" checked={palette === pl.v} onChange={() => setPalette(pl.v)} />
-              <span aria-hidden className="flex shrink-0 -space-x-1.5">
-                {pl.sw.map((c) => <span key={c} className="size-4 rounded-full border border-line-strong" style={{ background: c }} />)}
-              </span>
-              {pl.label}
-            </label>
-          ))}
-        </div>
-      </fieldset>
+      <PalettePicker />
 
       <fieldset disabled={palette !== null} className="disabled:opacity-50">
         <legend className="text-[15px] font-medium">Light or dark{palette !== null && <span className="text-[13px] font-normal text-muted"> · set by your color choice</span>}</legend>
