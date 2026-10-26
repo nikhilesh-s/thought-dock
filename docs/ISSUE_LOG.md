@@ -1,17 +1,11 @@
-# GitHub issue log (2026-10-26)
+# GitHub issue log (updated 2026-10-26)
 
-Honest status of every issue. "Built" means the AI-built work exists and is deployed; the issue stays open until a human ticks the review. Nothing below is marked done for a teammate who did not do it.
-
-| # | Issue | State | Evidence / what is left |
+| # | Issue | State | Notes |
 |---|---|---|---|
-| 1-11 | AI-built checkpoints (design contract, sync API, capture, DeskOS, classifier, landing, /jared, 3D dock, a11y audit, /brag, Vercel) | Built, open for human review | See RUN_LOG.md session 1; live at thought-dock-peach.vercel.app |
-| 23 | Color palettes (Maryam's feedback) | Built, open for human review | RUN_LOG.md session 2; DECISIONS #18 |
-| 12, 13 | Humanize copy (Luke, Maryam) | Open | No commits found |
-| 14, 15, 16 | Individual design reports | Open | Shared draft docs exist; each student still submits their own |
-| 17 | Score decision matrix | Open | Draft weights/scores exist in chat only; team must agree |
-| 18 | Real usability test | Open | docs/USABILITY_TEST.md says "not yet run" |
-| 19 | 50 real captures (Luke) | Open | None added |
-| 20 | Presentation deck | Open | Not started |
-| 21 | Nikhilesh reviews AI-built work | Open | Pending |
+| 1-11 | AI-built checkpoints (design contract, sync API, capture, DeskOS, classifier, landing, /jared, 3D dock, a11y audit, /brag, Vercel) | Built, open for human review | See RUN_LOG.md session 1 |
+| 20 | [Luke] Video | Open | Replaces the 15-minute deck task; Luke is making the video |
+| 21 | [Nikhilesh] Review AI-built checkpoints | Open | Pending |
+| 23 | Color palettes (Maryam's feedback) | Built, open for human review | RUN_LOG session 2, DECISIONS #18 |
+| 24 | Suggestion says Idea for a calendar invite | Closed, Done | Fixed in f7cffe6 (found in testing) |
 
-**Who did what (as the team's own report says):** Maryam: research, requested the palette feature, wrote report parts. Luke: marketing, video, report text. Nikhilesh: adjusted the code, report text, and now closes issues on the team's behalf because he has GitHub access.
+Removed by Nikhilesh on 2026-10-26 (deleted, not completed): #12 and #13 (copy rewrites), #14-16 (individual reports, tracked in the shared docs instead), #17 (decision matrix, being scored by the team in the report), #18 (usability test) and #19 (50 real captures). Deleting an issue does not mean the work happened.
