@@ -20,7 +20,7 @@ export const viewport: Viewport = {
 };
 
 // Applies saved theme/motion prefs before paint so there's no flash.
-const prefs = `try{var t=localStorage.getItem("td:theme");if(t)document.documentElement.dataset.theme=t;var m=localStorage.getItem("td:motion");if(m)document.documentElement.dataset.motion=m}catch(e){}`;
+const prefs = `try{var t=localStorage.getItem("td:theme");if(t)document.documentElement.dataset.theme=t;var p=localStorage.getItem("td:palette");if(p)document.documentElement.dataset.palette=p;var m=localStorage.getItem("td:motion");if(m)document.documentElement.dataset.motion=m}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

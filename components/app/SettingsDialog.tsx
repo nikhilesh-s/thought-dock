@@ -19,8 +19,21 @@ const THEMES = [
   { v: "dark", label: "Dark" },
 ] as const;
 
+// swatch = [bg, surface, accent]; keep in sync with the palettes in app/globals.css
+const PALETTES = [
+  { v: null, label: "Classic", sw: ["#f5f5f7", "#ffffff", "#0066cc"] },
+  { v: "rose", label: "Pastel pink", sw: ["#fdf1f4", "#ffffff", "#b02b5c"] },
+  { v: "sage", label: "Sage green", sw: ["#f0f5ee", "#ffffff", "#2d6a43"] },
+  { v: "sky", label: "Sky blue", sw: ["#eef5fb", "#ffffff", "#1c5ea8"] },
+  { v: "earth", label: "Earthy", sw: ["#f4ede1", "#ffffff", "#98471c"] },
+  { v: "plum", label: "Plum night", sw: ["#171120", "#251c32", "#c9a2ff"] },
+  { v: "forest", label: "Forest night", sw: ["#0e1a13", "#182a1f", "#7fd49b"] },
+  { v: "mocha", label: "Mocha night", sw: ["#1a1511", "#2a221a", "#eaaa6e"] },
+] as const;
+
 function SettingsBody({ dockId, onNewDock, onClose }: Omit<Props, "open">) {
   const theme = useStored("td:theme") ?? null;
+  const palette = useStored("td:palette") ?? null;
   const motion = useStored("td:motion");
   const suggest = useStored("td:suggest");
   const [asking, setAsking] = useState<null | "demo" | "fresh">(null);
@@ -28,12 +41,29 @@ function SettingsBody({ dockId, onNewDock, onClose }: Omit<Props, "open">) {
   const [copied, setCopied] = useState(false);
 
   const setTheme = (v: string | null) => setRootPref("theme", v);
+  const setPalette = (v: string | null) => setRootPref("palette", v);
   const setMotion = (reduce: boolean) => setRootPref("motion", reduce ? "reduce" : null);
 
   return (
     <div className="flex flex-col gap-6">
       <fieldset>
-        <legend className="text-[15px] font-medium">Theme</legend>
+        <legend className="text-[15px] font-medium">Colors</legend>
+        <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {PALETTES.map((pl) => (
+            <label key={pl.label}
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-line px-2.5 text-[14px] has-checked:border-accent has-checked:font-medium has-checked:outline-2 has-checked:outline-accent has-focus-visible:outline-3 has-focus-visible:outline-accent">
+              <input type="radio" name="palette" className="sr-only" checked={palette === pl.v} onChange={() => setPalette(pl.v)} />
+              <span aria-hidden className="flex shrink-0 -space-x-1.5">
+                {pl.sw.map((c) => <span key={c} className="size-4 rounded-full border border-line-strong" style={{ background: c }} />)}
+              </span>
+              {pl.label}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset disabled={palette !== null} className="disabled:opacity-50">
+        <legend className="text-[15px] font-medium">Light or dark{palette !== null && <span className="text-[13px] font-normal text-muted"> · set by your color choice</span>}</legend>
         <div className="mt-2 grid grid-cols-3 gap-1 rounded-full bg-bg-2 p-1">
           {THEMES.map((t) => (
             <label key={t.label}

@@ -52,7 +52,7 @@ export function reducedMotion() {
 }
 
 /** Persist a root pref (theme/motion) and apply it to <html data-*> now (layout.tsx re-applies before paint). */
-export function setRootPref(name: "theme" | "motion", value: string | null) {
+export function setRootPref(name: "theme" | "motion" | "palette", value: string | null) {
   setStored(`td:${name}`, value);
   const ds = document.documentElement.dataset;
   if (value) ds[name] = value;

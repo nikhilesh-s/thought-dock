@@ -21,12 +21,14 @@ const pairs = [
   ["k-task", "surface", 4.5], ["k-event", "surface", 4.5], ["k-idea", "surface", 4.5], ["k-resource", "surface", 4.5], ["k-note", "surface", 4.5],
   ["warn", "surface", 4.5], ["ok", "surface", 4.5],
 ];
+const palettes = [...css.matchAll(/:root\[data-palette="(\w+)"\] \{([\s\S]*?)\n\}/g)].map((m) => [m[1], Object.fromEntries([...m[2].matchAll(/--([\w-]+):\s*(#[0-9a-f]{6})/gi)].map((x) => [x[1], x[2]]))]);
+const themes = [["light", light], ["dark", dark], ...palettes];
 let fail = 0;
-console.log("| Foreground on background | Light | Dark | Needs |\n|---|---|---|---|");
+console.log("| Foreground on background | " + themes.map((t) => t[0]).join(" | ") + " | Needs |\n|---|" + "---|".repeat(themes.length + 1));
 for (const [fg, bg, min] of pairs) {
-  const l = ratio(light[fg], light[bg]), d = ratio(dark[fg], dark[bg]);
-  const ok = l >= min && d >= min;
+  const rs = themes.map(([, t]) => ratio(t[fg], t[bg]));
+  const ok = rs.every((r) => r >= min);
   if (!ok) fail++;
-  console.log(`| ${fg} on ${bg} | ${l.toFixed(2)} | ${d.toFixed(2)} | ${min} ${ok ? "✓" : "✗ FAIL"} |`);
+  console.log(`| ${fg} on ${bg} | ${rs.map((r) => r.toFixed(2)).join(" | ")} | ${min} ${ok ? "✓" : "✗ FAIL"} |`);
 }
 process.exit(fail ? 1 : 0);
