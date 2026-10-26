@@ -6,7 +6,7 @@ When a student processes a captured thought, Thought Dock suggests what kind of 
 |---|---|
 | Code | `lib/classifier.ts` (featurizer + inference), `scripts/train-classifier.ts` (training + evaluation), `scripts/classifier.test.ts` (checks) |
 | Weights | `lib/model.json`: 836 features × 5 classes + 5 biases, 41.9 KB |
-| Data | `data/thoughts.csv`: 690 labeled lines |
+| Data | `data/thoughts.csv`: 702 labeled lines |
 | Dependencies | None. Plain TypeScript, Node's standard library for training, nothing at inference |
 
 ## Intended use
@@ -39,7 +39,7 @@ Tie-breakers used in the data:
 
 ## Data
 
-`data/thoughts.csv` (`text,label`) has 690 rows: task 141, event 139, idea 137, resource 136, note 137.
+`data/thoughts.csv` (`text,label`) has 702 rows: task 141, event 151, idea 137, resource 136, note 137.
 
 **This data is synthetic. Claude (an AI model by Anthropic) wrote all of it.** It imitates how students type quick notes on a phone: lowercase, typos ("teh", "wednsday", "assignmnt"), shorthand ("hw", "pset", "tmrw", "ochem", "w", "abt"), course codes, times like "6pm thu", and URLs. It also includes deliberately hard cases, such as events with links, tasks with times, ideas mentioning weekdays, and notes about deadlines. No real user data is included.
 
@@ -92,11 +92,11 @@ Real numbers from `npm run train`. The split is a stratified 80/20 split with se
 
 | model | accuracy | macro-F1 |
 |---|---|---|
-| **Softmax logistic regression (shipped)** | **85.8%** | **85.7%** |
-| Multinomial Naive Bayes | 81.6% | 81.0% |
-| Keyword rules | 77.3% | 78.0% |
+| **Softmax logistic regression (shipped)** | **84.0%** | **83.7%** |
+| Multinomial Naive Bayes | 78.5% | 77.5% |
+| Keyword rules | 72.9% | 72.6% |
 
-**5-fold stratified CV, logistic regression, all 690 rows (seed 43):** accuracy **84.9% ± 1.6%** (sample sd; folds 87.2, 84.9, 83.2, 85.4, 83.8).
+**5-fold stratified CV, logistic regression, all 702 rows:** accuracy **85.3% ± 2.8%** (folds 84.0, 88.7, 86.3, 81.3, 86.3).
 
 ### Softmax logistic regression (shipped)
 
@@ -154,7 +154,7 @@ Confusion (rows = true, cols = predicted):
 | **resource** | 0 | 0 | 0 | 20 | 8 |
 | **note** | 0 | 5 | 0 | 1 | 22 |
 
-After evaluation, the shipped model was retrained on all 690 rows and exported to `lib/model.json`.
+After evaluation, the shipped model was retrained on all 702 rows and exported to `lib/model.json`.
 
 ## Limitations
 

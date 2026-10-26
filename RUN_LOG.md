@@ -37,3 +37,6 @@ What the AI agent actually did, in order. Results are copied from real command o
 3. **Checked.** `scripts/check-contrast.mjs` now reads every palette: all 16 text pairs pass 4.5:1 in all 9 themes. `tsc`, lint, tests and `next build` pass.
 4. **Shipped.** Commit `5053b1a` pushed to `main`; Vercel production deploy Ready.
 5. **Not verified.** Not clicked through on a real phone or desktop browser. Settings exists on `/desk` only, so `/capture` has no picker (it reads the device's saved choice).
+
+## 2026-10-26: Session 2 addendum, classifier bug (issue below)
+Found while testing: "Set a calendar invite to Luke to meet about the video." was suggested as an Idea (0.97). Cause: no training examples for calendar-invite phrasing without a date or time. Added 12 labeled event rows to `data/thoughts.csv`, retrained (`npm run train`). The sentence is now Event (0.99); 16 classifier checks and the contrast check pass. Held-out accuracy moved from 85.8% to 84.0% (144 held-out rows, 702 total); docs/MODEL_CARD.md updated. The report's Table 5 and Section 4.7 still quote the old numbers.
