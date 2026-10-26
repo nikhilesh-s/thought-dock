@@ -22,3 +22,4 @@ question during planning; **AI** means the design/build agent's default, open to
 | 15 | 2026-10-15 | Public repo `nikhilesh-s/thought-dock` | Instructor and teammates can see it without invites | Team |
 | 16 | 2026-10-15 | `/jared` = process portfolio for the instructor; `/brag` = 30–60 s launch video | Team | Team |
 | 17 | 2026-10-15 | Build with one orchestrating agent + parallel subagents in isolated git worktrees | Separate file ownership, so merges stay clean; covered on /jared as the long-horizon AI task | AI |
+| 18 | 2026-10-26 | Add **7 color palettes** (pink, sage, sky, earthy, plum/forest/mocha night) chosen in Settings and saved per device; the Light/Dark toggle is disabled while a palette is active | Teammate feedback (Maryam): not everyone wants one uniform dark theme. Palettes are token overrides, so no component changed; every palette is held to the same 4.5:1 contrast check | Team (Maryam's request), AI built |

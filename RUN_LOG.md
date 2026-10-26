@@ -29,3 +29,11 @@ What the AI agent actually did, in order. Results are copied from real command o
 9. **Contrast check.** Added `scripts/check-contrast.mjs`. It caught the light accent at 4.31:1, which was changed to #0066cc (5.11:1).
 10. **Fixed a J/K conflict.** K was assigned to both Keep and "previous". K is Keep; previous is ↑.
 11. **Deployed** `vercel deploy --prod`: https://thought-dock-peach.vercel.app. Production smoke test passed; see TEST_REPORT.md.
+
+## 2026-10-26: Session 2 (Claude Code, Sonnet 5.5)
+
+1. **Source of the change.** Maryam Jaweed's feedback (voice message plus comments in the shared report): let users pick their own color palette (pastel pink, sage green, earthy, several dark themes) instead of one dark/light theme.
+2. **Built** 7 palettes as CSS token overrides keyed on `<html data-palette>` (`app/globals.css`), a "Colors" picker in Settings, and a pre-paint script in `app/layout.tsx` so the saved choice applies with no flash. Choice is stored in `localStorage` (`td:palette`). No change to capture, inbox, Sort, task or event logic.
+3. **Checked.** `scripts/check-contrast.mjs` now reads every palette: all 16 text pairs pass 4.5:1 in all 9 themes. `tsc`, lint, tests and `next build` pass.
+4. **Shipped.** Commit `5053b1a` pushed to `main`; Vercel production deploy Ready.
+5. **Not verified.** Not clicked through on a real phone or desktop browser. Settings exists on `/desk` only, so `/capture` has no picker (it reads the device's saved choice).
