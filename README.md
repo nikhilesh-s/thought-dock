@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/hero.png" alt="Thought Dock landing page" width="100%">
+</p>
+
 # Thought Dock / DeskOS
 
 **Capture now. Organize later.** Put every thought down on your phone in one tap, then sort it at
@@ -13,9 +17,24 @@ Live: https://thought-dock-peach.vercel.app
 | `/jared` | Process portfolio (design thinking, personas, 3D dock, Agile, AI build, code) |
 | `/brag` | 25-second launch video |
 
-Made by Luke, Nikhilesh and Maryam for ENGR 1 Mini-Hackathon ("Making an Accessible World").
+## Team
+Made by Luke, Nikhilesh and Maryam for the ENGR 1 Mini-Hackathon ("Making an Accessible World").
 Built with Claude Code as AI design lead and builder; product decisions are the team's (see
 DECISIONS.md).
+
+## Status
+Last recorded run (2026-10-15, see [TEST_REPORT.md](TEST_REPORT.md)):
+
+| Check | Result |
+|---|---|
+| Types, lint, build | pass |
+| Classifier checks | 16 passed |
+| WCAG AA contrast | 16/16 pairs pass, light and dark |
+
+Not done yet:
+- Screen-reader pass (VoiceOver). See [ACCESSIBILITY_AUDIT.md](ACCESSIBILITY_AUDIT.md).
+- Usability test with a student. See [docs/USABILITY_TEST.md](docs/USABILITY_TEST.md).
+- Real-phone test of mic, live transcript, camera and offline queue.
 
 ## Try it
 1. Open `/desk` on a laptop. It starts with a few demo thoughts.
@@ -60,3 +79,6 @@ npm run train
 ## Team tasks
 See the [board](https://github.com/users/nikhilesh-s/projects/2) and [issues](https://github.com/nikhilesh-s/thought-dock/issues). Anything labeled `team` is
 for a person to do. Anything labeled `ai-built` needs a human review before it counts as done.
+
+## License
+MIT. See [LICENSE](LICENSE).
