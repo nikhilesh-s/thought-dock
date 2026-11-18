@@ -1,25 +1,27 @@
-import { DOCK, dockDrawingSvg, expectedVolume } from "@/lib/dockModel";
+import { DOCK, PRISM, dockDrawingSvg, expectedVolume, slopeDeg } from "@/lib/dockModel";
 import { LINKS } from "@/lib/links";
 import { DownloadIcon } from "@/components/Icons";
 import { DockViewer } from "./DockViewer";
 import { Method, Section, Sub, TextLink, captionCls, tableCls, tdCls, thCls } from "./ui";
 
+const { radius, puck, nfc, cable } = DOCK;
 const SPECS: [string, string][] = [
-  ["Base", `${DOCK.width} × ${DOCK.depth} × ${DOCK.baseHeight} mm, ${DOCK.chamfer} mm × 45° corner chamfers`],
-  ["Phone slot", `${DOCK.slotWidth} mm wide, walls at ${DOCK.angle}° from horizontal`],
-  ["Backrest", `${DOCK.backrestHeight} mm above the base, ${DOCK.backrestThickness} mm thick at the base`],
-  ["Front lip", `${DOCK.lipHeight} mm tall, ${DOCK.lipThickness} mm thick, starts ${DOCK.lipFront} mm from the front`],
-  ["NFC tag pocket", `⌀${DOCK.nfc.dia} × ${DOCK.nfc.depth} mm deep, underside, under the cradle`],
-  ["Cable channel", `${DOCK.cable.width} mm wide × ${DOCK.cable.depth} mm deep, exits the right side; ${DOCK.cable.width} × ${DOCK.cable.width} mm hole up through the slot floor`],
-  ["Feet", `4 × ⌀${DOCK.foot.dia} × ${DOCK.foot.depth} mm recesses for stick-on rubber bumpers`],
+  ["Overall", `${DOCK.width} W × ${DOCK.depth} D × ${DOCK.height} H mm triangular prism, vertical back`],
+  ["Sloped face", `${slopeDeg()}° from the desk (${DOCK.slopeNominal}° nominal in the hand drawing)`],
+  ["Rounded edges", `R${radius.apex} ridge, R${radius.front} front and back bottom edges`],
+  ["MagSafe recess", `⌀${puck.dia} × ${puck.depth} mm deep, square to the sloped face, centred on width`],
+  ["NFC chip pocket", `${nfc.size} × ${nfc.size} × ${nfc.depth} mm deep, ${nfc.gap} mm above the puck recess`],
+  ["Cable channel", `${cable.width} × ${cable.width} mm, inside, from the recess floor to the back wall`],
+  ["Rear cable exit", `⌀${cable.exitDia} mm through the ${cable.wall} mm back wall, ${PRISM.yc.toFixed(0)} mm above the desk`],
   ["Solid volume", `≈ ${(expectedVolume() / 1000).toFixed(0)} cm³ (checked against the exported mesh)`],
 ];
 
 const WHY = [
-  ["65° rest angle", "Steep enough to read a screen from a chair, shallow enough that a tap of the screen does not tip the phone back out."],
-  ["14 mm slot", "Most phones are 7 to 9 mm thick; a case adds up to about 4 mm. 14 mm leaves room without the phone rattling."],
-  ["Pocket on the underside", "A 1.2 mm recess takes a standard 30 mm NFC sticker flush, hidden, and protected from wear."],
-  ["Prints without supports", "Every surface is either flat or a straight extrusion of the side profile, so it prints lying on its side."],
+  ["A prism, not a cradle", "Three flat faces and a vertical back: nothing to snap off, nothing to tip over, and it reads as one calm object on a desk."],
+  [`${slopeDeg()}° face`, `Leans the phone back far enough to read from a chair while the puck holds it. The drawing says ${DOCK.slopeNominal}°; rounding the edges inside the ${DOCK.depth} × ${DOCK.height} mm envelope moves it slightly.`],
+  ["MagSafe does the holding", "The puck sits flush in its recess, so the phone snaps on, charges, and stays put without a slot or lip."],
+  ["NFC chip above the puck", `A ${nfc.size} mm tag sits ${nfc.depth} mm under the surface, so setting the phone down is the same as tapping it: the app switches into Desk Mode.`],
+  ["Prints without supports", "Standing on its base, every face is flat, vertical, or slopes upward; the channel and exit hole are short bridges."],
 ];
 
 export function ProductDesign() {
@@ -36,7 +38,7 @@ export function ProductDesign() {
 
       <div className="mt-20">
         <DockViewer />
-        <p className={`${captionCls} mt-3`}>Drag to orbit. The blue disc under the base is the NFC tag (use Show underside). Phone shown at 72 × 150 × 8 mm.</p>
+        <p className={`${captionCls} mt-3`}>Drag to orbit. The grey disc is the MagSafe puck and the blue square is the NFC chip. Phone shown at 147 × 71.5 × 8 mm.</p>
       </div>
 
       <div className="mt-20 grid gap-12 lg:grid-cols-[1.15fr_1fr]">

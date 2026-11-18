@@ -1,11 +1,11 @@
 "use client";
-// Interactive three.js view of the NFC Thought Dock, built from lib/dockModel.ts.
+// Interactive three.js view of the Triangular Prism Dock, built from lib/dockModel.ts.
 // Renders on demand (no idle loop). One short intro turn unless reduced motion is on.
 import { useEffect, useRef, useState } from "react";
 import type * as T from "three";
 import { RotateLeftIcon, RotateRightIcon, PhoneIcon } from "@/components/Icons";
 
-type Api = { orbit: (dTheta: number, dPhi: number) => void; zoom: (f: number) => void; reset: () => void; underside: () => void; showPhone: (on: boolean) => void };
+type Api = { orbit: (dTheta: number, dPhi: number) => void; zoom: (f: number) => void; reset: () => void; back: () => void; showPhone: (on: boolean) => void };
 
 const reduced = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.dataset.motion === "reduce";
@@ -20,10 +20,11 @@ export function DockViewer() {
     let disposed = false;
     let cleanup = () => {};
     (async () => {
-      const [THREE, { OrbitControls }, { RoundedBoxGeometry }, model] = await Promise.all([
+      const [THREE, { OrbitControls }, { RoundedBoxGeometry }, { toCreasedNormals }, model] = await Promise.all([
         import("three"),
         import("three/examples/jsm/controls/OrbitControls.js"),
         import("three/examples/jsm/geometries/RoundedBoxGeometry.js"),
+        import("three/examples/jsm/utils/BufferGeometryUtils.js"),
         import("@/lib/dockModel"),
       ]);
       const el = host.current;
@@ -41,14 +42,14 @@ export function DockViewer() {
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       const canvas = renderer.domElement;
       canvas.setAttribute("role", "img");
-      canvas.setAttribute("aria-label", "3D model of the NFC Thought Dock with a phone resting in its 65 degree slot. Drag to rotate, scroll or pinch to zoom, or use the buttons below.");
+      canvas.setAttribute("aria-label", `3D model of the Triangular Prism Dock: a ${model.DOCK.width} by ${model.DOCK.depth} by ${model.DOCK.height} millimetre prism with a phone held on its sloped face by a MagSafe puck. Drag to rotate, scroll or pinch to zoom, or use the buttons below.`);
       canvas.className = "block h-full w-full cursor-grab active:cursor-grabbing";
       el.appendChild(canvas);
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(32, 1, 1, 3000);
-      const target = new THREE.Vector3(0, 58, -6);
-      const home = new THREE.Vector3(215, 200, 335);
+      const target = new THREE.Vector3(0, 30, 0);
+      const home = new THREE.Vector3(150, 135, 295);
 
       const hemi = new THREE.HemisphereLight(0xffffff, 0x8a8a90, 1.6);
       const sun = new THREE.DirectionalLight(0xffffff, 2.2);
@@ -68,17 +69,25 @@ export function DockViewer() {
       scene.add(group);
 
       const bodyMat = new THREE.MeshStandardMaterial({ roughness: 0.62, metalness: 0 });
-      const edgeMat = new THREE.LineBasicMaterial({ transparent: true });
+      // No outline edges: the body is several touching solids, so edges would draw their seams. Creased
+      // normals shade the rounded long edges smoothly and keep the recesses crisp.
       for (const g of model.buildDockGeometries()) {
-        const m = new THREE.Mesh(g, bodyMat);
+        const m = new THREE.Mesh(toCreasedNormals(g, Math.PI / 6), bodyMat);
         m.castShadow = m.receiveShadow = true;
-        group.add(m, new THREE.LineSegments(new THREE.EdgesGeometry(g, 28), edgeMat));
+        group.add(m);
       }
-      // NFC tag sticker sitting in its underside pocket (visible from below).
+      // MagSafe puck in its recess and the NFC chip in its pocket, both square to the sloped face.
+      const { puck, nfc } = model.DOCK;
+      const puckMat = new THREE.MeshStandardMaterial({ roughness: 0.35 });
+      const puckMesh = new THREE.Mesh(new THREE.CylinderGeometry(puck.dia / 2 - 0.5, puck.dia / 2 - 0.5, puck.depth - 0.6, 64), puckMat);
       const tagMat = new THREE.MeshStandardMaterial({ roughness: 0.4 });
-      const tag = new THREE.Mesh(new THREE.CylinderGeometry(14.5, 14.5, 0.6, 48), tagMat);
-      tag.position.set(model.DOCK.width / 2, 0.7, -model.DOCK.nfc.z);
-      group.add(tag);
+      const tag = new THREE.Mesh(new THREE.BoxGeometry(nfc.size - 1, 0.6, nfc.size - 1), tagMat);
+      for (const [mesh, u, n] of [[puckMesh, model.PRISM.puckU, -(puck.depth + 0.6) / 2], [tag, model.PRISM.nfcU, -nfc.depth + 0.3]] as const) {
+        const s = model.onSlope(u, n);
+        mesh.position.set(...s.position);
+        mesh.rotation.x = s.tiltX;
+        group.add(mesh);
+      }
 
       const pose = model.phonePose();
       const phoneMat = new THREE.MeshStandardMaterial({ roughness: 0.3, transparent: true, opacity: 0.2, depthWrite: false });
@@ -108,8 +117,7 @@ export function DockViewer() {
         const v = (n: string) => cs.getPropertyValue(n).trim();
         const dark = new THREE.Color(v("--surface") || "#ffffff").getHSL({ h: 0, s: 0, l: 0 }).l < 0.5;
         bodyMat.color.set(dark ? "#4a4a4e" : "#e6e6eb");
-        edgeMat.color.set(v("--text") || "#1d1d1f");
-        edgeMat.opacity = dark ? 0.4 : 0.45;
+        puckMat.color.set(dark ? "#8e8e93" : "#c7c7cc");
         tagMat.color.set(v("--accent") || "#0071e3");
         phoneMat.color.set(dark ? "#f5f5f7" : "#1d1d1f");
         phoneMat.opacity = dark ? 0.16 : 0.12;
@@ -155,7 +163,7 @@ export function DockViewer() {
           place(off.setLength(len).add(controls.target));
         },
         reset() { stopIntro(); place(home); },
-        underside() { stopIntro(); place(new THREE.Vector3(170, -300, 200)); },
+        back() { stopIntro(); place(new THREE.Vector3(-200, 130, -300)); },
         showPhone(on) { phoneMesh.visible = on; render(); },
       };
 
@@ -239,7 +247,7 @@ export function DockViewer() {
         <button type="button" className={btn} disabled={off} onClick={() => api.current?.orbit(0, Math.PI / 12)}>Tilt down</button>
         <button type="button" className={btn} disabled={off} onClick={() => api.current?.zoom(0.8)} aria-label="Zoom in" title="Zoom in">+</button>
         <button type="button" className={btn} disabled={off} onClick={() => api.current?.zoom(1.25)} aria-label="Zoom out" title="Zoom out">−</button>
-        <button type="button" className={btn} disabled={off} onClick={() => api.current?.underside()}>Show underside</button>
+        <button type="button" className={btn} disabled={off} onClick={() => api.current?.back()}>Show back</button>
         <button type="button" className={btn} disabled={off} aria-pressed={phone}
           onClick={() => { setPhone(!phone); api.current?.showPhone(!phone); }}>
           <PhoneIcon size={18} /> Phone

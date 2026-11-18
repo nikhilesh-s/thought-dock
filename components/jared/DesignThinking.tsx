@@ -35,7 +35,7 @@ const WALL: { cluster: string; ideas: Idea[] }[] = [
 
 const CONCEPTS = [
   { n: 1, name: "NFC Thought Dock", status: "Not chosen", sketch: <SketchDock />,
-    idea: "A small stand on the desk with an NFC tag. Tap your phone on it and the app switches into Desk Mode.",
+    idea: "A triangular prism dock on the desk with a MagSafe puck and an NFC chip. Set your phone on it and the app switches into Desk Mode.",
     why: "Costs money to make, needs a device in a specific place, and makes a physical object a requirement for access. We kept it as our 3D product-design study." },
   { n: 2, name: "Capture Mode → DeskOS", status: "Selected", sketch: <SketchSplit />,
     idea: "Software only. A phone screen that does one thing, capture, and a desktop workspace for sorting when you sit down.",
@@ -195,11 +195,11 @@ const sk = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinec
 function SketchDock() {
   return (
     <svg viewBox="0 0 240 120" className="h-auto w-full" role="img" aria-labelledby="sk1">
-      <title id="sk1">Sketch: phone leaning in a desk stand, NFC waves near the base</title>
-      <path {...sk} d="M40 100h150l-10-18H54z" />
-      <path {...sk} d="M98 82 128 22M112 82l30-58" />
-      <rect {...sk} x="106" y="18" width="24" height="70" rx="5" transform="rotate(26 118 53)" />
-      <path {...sk} stroke="var(--accent)" d="M150 92c6-4 6-12 0-16M158 96c10-7 10-21 0-28" />
+      <title id="sk1">Sketch: phone resting on the sloped face of a triangular prism dock, NFC waves above it</title>
+      <path {...sk} d="M40 100h150l24-56H64z" />
+      <path {...sk} d="M190 100l24-56 10 54z" />
+      <path {...sk} d="M80 92h78l15-36H95z" />
+      <path {...sk} stroke="var(--accent)" d="M196 34c5-4 5-11 0-15M204 38c9-7 9-19 0-26" />
       <path {...sk} opacity=".5" d="M20 108h200" />
     </svg>
   );
